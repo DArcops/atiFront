@@ -1,0 +1,153 @@
+extends ../layout2.jade
+
+
+block content
+  .row(ng-controller="Stats" ng-show="administrator")
+    .col-lg-12
+      .card
+        .card-body(style="margin-left:20px;margin-top:20px;margin-bottom:20px;margin-right:20px;")
+          select.custom-select.pull-right(ng-model="selectedCourse" ng-change='change()')
+            option(selected='' ng-repeat="c in courses"  value="{{c.id}}") {{c.name}}
+
+          h4.card-title Usuarios
+          h6.card-subtitle Inscritos en Curso
+          .table-responsive
+            table.table.stylish-table
+              thead
+                tr
+                  th(style='width:90px;') Usuario
+                  th Nombre
+                  th Ejercicios Resueltos
+              tbody
+                tr(ng-repeat="u in users")
+                  td
+                    span.round
+                      i.ti-user
+                  td
+                    h6
+                      a.link(href='javascript:void(0)') {{u.username}}
+                    small.text-muted email : {{u.email}}
+                  td
+                    h5 {{u.solved_exercises}}
+
+
+  .row(ng-controller="Stats" ng-show="administrator" )
+    .col-lg-8.col-xlg-9.col-md-7
+      .card
+        .card-body(style="margin-left:20px;margin-top:20px;margin-bottom:20px;margin-right:20px;")
+          .d-flex.flex-wrap
+            div
+              h3.card-title Soluciones enviadas
+              h6.card-subtitle en el curso
+            .ml-auto.align-self-center
+              ul.list-inline.m-b-0
+                li
+                  h6.text-muted.text-success
+                    i.fa.fa-circle.font-10.m-r-10
+                    | Envios Correctos
+                li
+                  h6.text-muted.text-info
+                    i.fa.fa-circle.font-10.m-r-10
+                    | Envios incorrectos
+          .campaign.ct-charts
+            .chartist-tooltip(style='top: 121px; left: 52.6719px;')
+            svg.ct-chart-line(xmlns:ct='http://gionkunz.github.com/chartist-js/ct', width='100%', height='100%', style='width: 100%; height: 100%;')
+              g.ct-grids
+                line.ct-grid.ct-horizontal(x1='30', x2='30', y1='15', y2='245')
+                line.ct-grid.ct-horizontal(x1='116.23660714285714', x2='116.23660714285714', y1='15', y2='245')
+                line.ct-grid.ct-horizontal(x1='202.47321428571428', x2='202.47321428571428', y1='15', y2='245')
+                line.ct-grid.ct-horizontal(x1='288.70982142857144', x2='288.70982142857144', y1='15', y2='245')
+                line.ct-grid.ct-horizontal(x1='374.94642857142856', x2='374.94642857142856', y1='15', y2='245')
+                line.ct-grid.ct-horizontal(x1='461.18303571428567', x2='461.18303571428567', y1='15', y2='245')
+                line.ct-grid.ct-horizontal(x1='547.4196428571429', x2='547.4196428571429', y1='15', y2='245')
+                line.ct-grid.ct-horizontal(x1='633.65625', x2='633.65625', y1='15', y2='245')
+                line.ct-grid.ct-vertical(y1='245', y2='245', x1='30', x2='633.65625')
+                line.ct-grid.ct-vertical(y1='168.33333333333331', y2='168.33333333333331', x1='30', x2='633.65625')
+                line.ct-grid.ct-vertical(y1='91.66666666666666', y2='91.66666666666666', x1='30', x2='633.65625')
+                line.ct-grid.ct-vertical(y1='15', y2='15', x1='30', x2='633.65625')
+              g
+                g.ct-series.ct-series-a
+                  path.ct-area(d='M 30 245 L 30 245 C 44.373 238.611 87.491 214.333 116.237 206.667 C 144.982 199 173.728 202.833 202.473 199 C 231.219 195.167 259.964 207.944 288.71 183.667 C 317.455 159.389 346.201 54.611 374.946 53.333 C 403.692 52.056 432.437 154.278 461.183 176 C 489.929 197.722 518.674 202.833 547.42 183.667 C 576.165 164.5 619.283 81.444 633.656 61 L 633.656 245 Z', x1='NaN')
+                  animate(attributename='d', begin='indefinite', dur='500ms', from='M30,230L30,230C44.373,230,87.491,230,116.237,230C144.982,230,173.728,230,202.473,230C231.219,230,259.964,230,288.71,230C317.455,230,346.201,230,374.946,230C403.692,230,432.437,230,461.183,230C489.929,230,518.674,230,547.42,230C576.165,230,619.283,230,633.656,230L633.656,230Z', to='M30,245L30,245C44.373,238.611,87.491,214.333,116.237,206.667C144.982,199,173.728,202.833,202.473,199C231.219,195.167,259.964,207.944,288.71,183.667C317.455,159.389,346.201,54.611,374.946,53.333C403.692,52.056,432.437,154.278,461.183,176C489.929,197.722,518.674,202.833,547.42,183.667C576.165,164.5,619.283,81.444,633.656,61L633.656,245Z', fill='freeze')
+                  path.ct-line(d='M 30 245 C 44.373 238.611 87.491 214.333 116.237 206.667 C 144.982 199 173.728 202.833 202.473 199 C 231.219 195.167 259.964 207.944 288.71 183.667 C 317.455 159.389 346.201 54.611 374.946 53.333 C 403.692 52.056 432.437 154.278 461.183 176 C 489.929 197.722 518.674 202.833 547.42 183.667 C 576.165 164.5 619.283 81.444 633.656 61')
+                  animate(attributename='d', begin='indefinite', dur='500ms', from='M30,230C44.373,230,87.491,230,116.237,230C144.982,230,173.728,230,202.473,230C231.219,230,259.964,230,288.71,230C317.455,230,346.201,230,374.946,230C403.692,230,432.437,230,461.183,230C489.929,230,518.674,230,547.42,230C576.165,230,619.283,230,633.656,230', to='M30,245C44.373,238.611,87.491,214.333,116.237,206.667C144.982,199,173.728,202.833,202.473,199C231.219,195.167,259.964,207.944,288.71,183.667C317.455,159.389,346.201,54.611,374.946,53.333C403.692,52.056,432.437,154.278,461.183,176C489.929,197.722,518.674,202.833,547.42,183.667C576.165,164.5,619.283,81.444,633.656,61', fill='freeze')
+                  line.ct-point(x1='30', y1='245', x2='30.01', y2='245', value='0')
+                  line.ct-point(x1='116.23660714285714', y1='206.66666666666666', x2='116.24660714285714', y2='206.66666666666666', value='5')
+                  line.ct-point(x1='202.47321428571428', y1='199', x2='202.48321428571427', y2='199', value='6')
+                  line.ct-point(x1='288.70982142857144', y1='183.66666666666666', x2='288.71982142857144', y2='183.66666666666666', value='8')
+                  line.ct-point(x1='374.94642857142856', y1='53.33333333333334', x2='374.95642857142855', y2='53.33333333333334', value='25')
+                  line.ct-point(x1='461.18303571428567', y1='176', x2='461.19303571428566', y2='176', value='9')
+                  line.ct-point(x1='547.4196428571429', y1='183.66666666666666', x2='547.4296428571429', y2='183.66666666666666', value='8')
+                  line.ct-point(x1='633.65625', y1='61', x2='633.66625', y2='61', value='24')
+                g.ct-series.ct-series-b
+                  path.ct-area(d='M 30 245 L 30 245 C 44.373 241.167 87.491 223.278 116.237 222 C 144.982 220.722 173.728 236.056 202.473 237.333 C 231.219 238.611 259.964 238.611 288.71 229.667 C 317.455 220.722 346.201 182.389 374.946 183.667 C 403.692 184.944 432.437 233.5 461.183 237.333 C 489.929 241.167 518.674 206.667 547.42 206.667 C 576.165 206.667 619.283 232.222 633.656 237.333 L 633.656 245 Z', x1='NaN')
+                  animate(attributename='d', begin='indefinite', dur='500ms', from='M30,230L30,230C44.373,230,87.491,230,116.237,230C144.982,230,173.728,230,202.473,230C231.219,230,259.964,230,288.71,230C317.455,230,346.201,230,374.946,230C403.692,230,432.437,230,461.183,230C489.929,230,518.674,230,547.42,230C576.165,230,619.283,230,633.656,230L633.656,230Z', to='M30,245L30,245C44.373,241.167,87.491,223.278,116.237,222C144.982,220.722,173.728,236.056,202.473,237.333C231.219,238.611,259.964,238.611,288.71,229.667C317.455,220.722,346.201,182.389,374.946,183.667C403.692,184.944,432.437,233.5,461.183,237.333C489.929,241.167,518.674,206.667,547.42,206.667C576.165,206.667,619.283,232.222,633.656,237.333L633.656,245Z', fill='freeze')
+                  path.ct-line(d='M 30 245 C 44.373 241.167 87.491 223.278 116.237 222 C 144.982 220.722 173.728 236.056 202.473 237.333 C 231.219 238.611 259.964 238.611 288.71 229.667 C 317.455 220.722 346.201 182.389 374.946 183.667 C 403.692 184.944 432.437 233.5 461.183 237.333 C 489.929 241.167 518.674 206.667 547.42 206.667 C 576.165 206.667 619.283 232.222 633.656 237.333')
+                  animate(attributename='d', begin='indefinite', dur='500ms', from='M30,230C44.373,230,87.491,230,116.237,230C144.982,230,173.728,230,202.473,230C231.219,230,259.964,230,288.71,230C317.455,230,346.201,230,374.946,230C403.692,230,432.437,230,461.183,230C489.929,230,518.674,230,547.42,230C576.165,230,619.283,230,633.656,230', to='M30,245C44.373,241.167,87.491,223.278,116.237,222C144.982,220.722,173.728,236.056,202.473,237.333C231.219,238.611,259.964,238.611,288.71,229.667C317.455,220.722,346.201,182.389,374.946,183.667C403.692,184.944,432.437,233.5,461.183,237.333C489.929,241.167,518.674,206.667,547.42,206.667C576.165,206.667,619.283,232.222,633.656,237.333', fill='freeze')
+                  line.ct-point(x1='30', y1='245', x2='30.01', y2='245', value='0')
+                  line.ct-point(x1='116.23660714285714', y1='222', x2='116.24660714285714', y2='222', value='3')
+                  line.ct-point(x1='202.47321428571428', y1='237.33333333333334', x2='202.48321428571427', y2='237.33333333333334', value='1')
+                  line.ct-point(x1='288.70982142857144', y1='229.66666666666666', x2='288.71982142857144', y2='229.66666666666666', value='2')
+                  line.ct-point(x1='374.94642857142856', y1='183.66666666666666', x2='374.95642857142855', y2='183.66666666666666', value='8')
+                  line.ct-point(x1='461.18303571428567', y1='237.33333333333334', x2='461.19303571428566', y2='237.33333333333334', value='1')
+                  line.ct-point(x1='547.4196428571429', y1='206.66666666666666', x2='547.4296428571429', y2='206.66666666666666', value='5')
+                  line.ct-point(x1='633.65625', y1='237.33333333333334', x2='633.66625', y2='237.33333333333334', value='1')
+              g.ct-labels
+                foreignobject(style='overflow: visible;', x='30', y='250', width='86.23660714285714', height='20')
+                  span.ct-label.ct-horizontal.ct-end(style='width: 86px; height: 20px', xmlns='http://www.w3.org/2000/xmlns/') 19-Nov
+                foreignobject(style='overflow: visible;', x='116.23660714285714', y='250', width='86.23660714285714', height='20')
+                  span.ct-label.ct-horizontal.ct-end(style='width: 86px; height: 20px', xmlns='http://www.w3.org/2000/xmlns/') 20-Nov
+                foreignobject(style='overflow: visible;', x='202.47321428571428', y='250', width='86.23660714285717', height='20')
+                  span.ct-label.ct-horizontal.ct-end(style='width: 86px; height: 20px', xmlns='http://www.w3.org/2000/xmlns/') 21-Nov
+                foreignobject(style='overflow: visible;', x='288.70982142857144', y='250', width='86.23660714285711', height='20')
+                  span.ct-label.ct-horizontal.ct-end(style='width: 86px; height: 20px', xmlns='http://www.w3.org/2000/xmlns/') 22-Nov
+                foreignobject(style='overflow: visible;', x='374.94642857142856', y='250', width='86.23660714285711', height='20')
+                  span.ct-label.ct-horizontal.ct-end(style='width: 86px; height: 20px', xmlns='http://www.w3.org/2000/xmlns/') 23-Nov
+                foreignobject(style='overflow: visible;', x='461.18303571428567', y='250', width='86.23660714285722', height='20')
+                  span.ct-label.ct-horizontal.ct-end(style='width: 86px; height: 20px', xmlns='http://www.w3.org/2000/xmlns/') 24-Nov
+                foreignobject(style='overflow: visible;', x='547.4196428571429', y='250', width='86.23660714285711', height='20')
+                  span.ct-label.ct-horizontal.ct-end(style='width: 86px; height: 20px', xmlns='http://www.w3.org/2000/xmlns/') 25-Nov
+                foreignobject(style='overflow: visible;', x='633.65625', y='250', width='30', height='20')
+                  span.ct-label.ct-horizontal.ct-end(style='width: 30px; height: 20px', xmlns='http://www.w3.org/2000/xmlns/') 26-Nov
+                foreignobject(style='overflow: visible;', y='168.33333333333331', x='10', height='76.66666666666667', width='10')
+                  span.ct-label.ct-vertical.ct-start(style='height: 77px; width: 10px', xmlns='http://www.w3.org/2000/xmlns/') 0
+                foreignobject(style='overflow: visible;', y='91.66666666666664', x='10', height='76.66666666666667', width='10')
+                  span.ct-label.ct-vertical.ct-start(style='height: 77px; width: 10px', xmlns='http://www.w3.org/2000/xmlns/') 10
+                foreignobject(style='overflow: visible;', y='15', x='10', height='76.66666666666666', width='10')
+                  span.ct-label.ct-vertical.ct-start(style='height: 77px; width: 10px', xmlns='http://www.w3.org/2000/xmlns/') 20
+                foreignobject(style='overflow: visible;', y='-15', x='10', height='30', width='10')
+                  span.ct-label.ct-vertical.ct-start(style='height: 30px; width: 10px', xmlns='http://www.w3.org/2000/xmlns/') 30
+              defs
+                lineargradient#gradient(x1='0', y1='1', x2='0', y2='0')
+                  stop(offset='0', stop-color='rgba(255, 255, 255, 1)')
+                  stop(offset='1', stop-color='rgba(38, 198, 218, 1)')
+          .row.text-center
+            .col-lg-4.col-md-4.m-t-20
+              h1.m-b-0.font-light {{acceptedSolutions + wrongSolutions}}
+              small Total de Envios
+            .col-lg-4.col-md-4.m-t-20
+              h1.m-b-0.font-light {{acceptedSolutions}}
+              small Total de Envios Correctos
+            .col-lg-4.col-md-4.m-t-20
+              h1.m-b-0.font-light {{wrongSolutions}}
+              small Total de Envios Incorrectos
+
+
+
+    .col-lg-4.col-md-5
+      .card
+        .card-body(style="margin-left:20px;margin-top:20px;margin-bottom:20px;margin-right:20px;")
+          h3.card-title Numero de Usuarios
+          h6.card-subtitle Por Curso
+          canvas#oilChart(width='600', height='730')
+
+
+
+      script(src="./javascripts/angular.min.js")
+      script(src="./javascripts/chart.js")
+      script(src="./javascripts/jquery-2.1.1.min.js")
+      script(src="./javascripts/controllers/stats.js")
+      script.
+        $(document).ready(function() {
+        $('#summernote').summernote();
+        });

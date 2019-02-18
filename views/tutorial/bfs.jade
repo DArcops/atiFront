@@ -1,0 +1,100 @@
+doctype html
+html(ng-app="app")
+  head
+    link(href='min/plugin-min.css', type='text/css', rel='stylesheet')
+    link(href='min/custom-min.css', type='text/css', rel='stylesheet')
+    link(href='css/materialize.min.css', type='text/css'. rel='stylesheet')
+    link(href='css/stylesheets/style.css', type='text/css'. rel='stylesheet')
+
+  body(ng-controller="bfs_main as bf")
+    nav.blue
+      div.nav-wrapper(style="color:#37474F;")
+        a(href="/").brand-logo.center Graph app
+
+
+    div.container
+      .row
+        div#instructions.col.s12.m12.l4(style="resize:none; width:100%; height:100%; overflow-y:auto;" data-role="none")
+          h5 Representación de un Grafo
+          p
+            En En esta primera actividad , aprenderas como construir un grafo en lenguaje en C++.
+
+          p
+            A continuación en las primeras dos lineas preparamos las librerias de C++.Lo siguiente es armar un vector de vectores que tendrá la representación de nuestro grafo.
+            Si no conoces esta estructura , te recomendamos leer el reference
+            para los vectores.
+
+          img(src="./images/bfs.gif")
+
+          p
+            De De esta forma , nuestro grafo se vera como una matriz en donde cada indice contendrá una lista de los nodos al i-esimo nodo en el grafo
+            como se muestra en la siguiente forma.
+
+          h5 Instrucciones:
+          p
+            EN Implementando un vector de vectores y mediante el uso de push_back, crea el siguiente grafo:
+          img(src="./images/first_example.png")
+
+          h6 Nota: el grafo es dirigido.
+
+
+      .row.center-align
+        textarea#lienxzo.col.s12.m9.l9(style="background-color:#37474F; color:#FFFFFF; padding-top:5px; padding-left:10px; height:520px; width:100%;" ng-model="text"){{text}}
+
+    div.container.hide-on-med-and-up
+      div.row.center-align
+        div.col.s12
+          a.dropdown-button.btn(href="#" style="width:200px;" data-activates="dropdown1") Hints
+          ul#dropdown1.dropdown-content(style="width:300px;")
+            li
+              a(href='#!') Con
+            li
+              a(href='#!') V[1].push_back(2);
+            li.divider
+            li
+              a(href='#!') Creas una arista de 1 a 2.
+        br
+        br
+        
+        div.row.center-align
+          div.col.s12
+            a.btn.blue(ng-click="validate()" style="width:250px" ng-show="eval") Evaluar!
+
+          a.btn(href='/bfs_tutorial/2' ng-show="btn_next") Siguiente!
+    
+    div.container.hide-on-small-only
+      div.row
+        div.col.m6.l4
+          a.dropdown-button.btn(href="#" style="width:200px;" data-activates="dropdown1") Hints
+          ul#dropdown1.dropdown-content(style="width:300px;")
+            li
+              a(href='#!') Con
+            li
+              a(href='#!') V[1].push_back(2);
+            li.divider
+            li
+              a(href='#!') Creas una arista de 1 a 2.
+        
+        div.col.m6.l4
+          a.btn.blue(ng-click="validate()" style="width:250px" ng-show="eval") Evaluar!
+
+        //a.btn(href='/bfs_tutorial/2' ng-show="btn_next") Siguiente!
+
+
+
+    script(src="./javascripts/angular.min.js")
+    script(src="./javascripts/controllers/bfs_controller.js")
+    script(src="./javascripts/jquery-2.1.1.min.js")
+    script(src="./javascripts/materialize.min.js")
+
+    script.
+
+      $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+      });

@@ -1,0 +1,103 @@
+extends ../layout2.jade
+
+block content
+  .row(style="padding-top:30px;")
+    .col-12
+      .card
+        .card-body(style="padding:1.4rem;")
+          h4.card-title Provider Devices
+          h6.card-subtitle Devices details
+          .table-responsive.m-t-40
+              table#example23.display.nowrap.table.table-hover.table-striped.table-bordered.dataTable(cellspacing='0', width='100%', role='grid', aria-describedby='example23_info', style='width: 100%;')
+                thead
+                  tr(role='row')
+                    th.sorting_asc(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Name: activate to sort column descending', style='width: 162px;') Name
+                    th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Position: activate to sort column ascending', style='width: 249px;') Position
+                    th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Office: activate to sort column ascending', style='width: 119px;') Office
+                    th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Age: activate to sort column ascending', style='width: 45px;') Age
+                    th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Start date: activate to sort column ascending', style='width: 104px;') Start date
+                    th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Salary: activate to sort column ascending', style='width: 78px;') Salary
+                tfoot
+                  tr
+                    th(rowspan='1', colspan='1') Name
+                    th(rowspan='1', colspan='1') Position
+                    th(rowspan='1', colspan='1') Office
+                    th(rowspan='1', colspan='1') Age
+                    th(rowspan='1', colspan='1') Start date
+                    th(rowspan='1', colspan='1') Salary
+                tbody
+                  tr.odd(role='row')
+                    td.sorting_1 Airi Satou
+                    td Accountant
+                    td Tokyo
+                    td 33
+                    td 2008/11/28
+                    td $162,700
+                  tr.even(role='row')
+                    td.sorting_1 Angelica Ramos
+                    td Chief Executive Officer (CEO)
+                    td London
+                    td 47
+                    td 2009/10/09
+                    td $1,200,000
+                  tr.odd(role='row')
+                    td.sorting_1 Ashton Cox
+                    td Junior Technical Author
+                    td San Francisco
+                    td 66
+                    td 2009/01/12
+                    td $86,000
+                  tr.even(role='row')
+                    td.sorting_1 Bradley Greer
+                    td Software Engineer
+                    td London
+                    td 41
+                    td 2012/10/13
+                    td $132,000
+                  tr.odd(role='row')
+                    td.sorting_1 Brenden Wagner
+                    td Software Engineer
+                    td San Francisco
+                    td 28
+                    td 2011/06/07
+                    td $206,850
+                  tr.even(role='row')
+                    td.sorting_1 Brielle Williamson
+                    td Integration Specialist
+                    td New York
+                    td 61
+                    td 2012/12/02
+                    td $372,000
+                  tr.odd(role='row')
+                    td.sorting_1 Bruno Nash
+                    td Software Engineer
+                    td London
+                    td 38
+                    td 2011/05/03
+                    td $163,500
+                  tr.even(role='row')
+                    td.sorting_1 Caesar Vance
+                    td Pre-Sales Support
+                    td New York
+                    td 21
+                    td 2011/12/12
+                    td $106,450
+                  tr.odd(role='row')
+                    td.sorting_1 Cara Stevens
+                    td Sales Assistant
+                    td New York
+                    td 46
+                    td 2011/12/06
+                    td $145,600
+                  tr.even(role='row')
+                    td.sorting_1 Cedric Kelly
+                    td Senior Javascript Developer
+                    td Edinburgh
+                    td 22
+                    td 2012/03/29
+                    td $433,060
+
+
+      script(src="./javascripts/angular.min.js")
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+      script(src="./javascripts/controllers/list_course.js")

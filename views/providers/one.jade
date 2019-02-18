@@ -1,0 +1,47 @@
+extends ../layout2.jade
+
+block content
+  .row(ng-controller='List_Lessons')
+    .col-lg-8.col-xlg-9.col-md-8
+      .card
+        .profiletimeline
+          .sl-item(ng-repeat='leccion in lecciones')
+            .sl-left
+              img.img-circle(src='./images/3.jpg', alt='user')
+            .sl-right
+              div
+                a.link(href='#') {{leccion.name}}
+                span.sl-date  5 minutes ago
+                p.m-t-10
+                  | {{leccion.description}}
+              .like-comm.m-t-20
+                a.link.m-r-10(href='javascript:void(0)')
+                  i.fa.fa-thumbs-up.text-blue
+                  |  20 Likes
+                a.link.m-r-10(href='javascript:void(0)')
+                  i.fa.fa-user-circle.text-blue
+                  |  5 Usuarios
+                button.btn.waves-effect.waves-light.btn-rounded.btn-xs.btn-info(type='button' style="margin-left:3%" ng-click='view(leccion.id)') Ver Lección
+                button.btn.btn-success.btn-circle.pull-right(type='button' ng-show="administrator" ng-click="update(leccion.id)")
+                  i.fa.fa-pencil
+            hr
+
+    .col-lg-4.col-xlg-3.col-md-4
+      .card
+        h4.text-themecolor.m-b-0.m-t-0(style="margin-top:8%; text-align:center") Filtrar
+        .form-group(style="margin-top:8%; margin-left:10%;")
+          .switch
+            label Recientes
+              input(type='checkbox', checked='')
+              span.lever.switch-col-light-blue
+        .form-group(style=" margin-left:10%;")
+          .row
+            label.col-sm-2(style="margin-top:5px;")  Nivel
+            .col-sm-8
+              select.form-control.form-control-line(ng-model='selected_level' ng-change='refresh()')
+                option(ng-repeat='level in levels' value='{{level.id}}' selected="selected"){{level.number}}
+      button.btn-rounded.btn-success(style="margin-left:30%" ng-show="administrator" ng-click="addLesson()")  Agregar lección
+
+
+    script(src="./javascripts/angular.min.js")
+    script(src="./javascripts/controllers/list_lessons.js")

@@ -1,0 +1,41 @@
+extends ../layout.jade
+block content
+
+  h3(style="color:#3F51B5;padding-left:100px;") !Comencemos, #{nombre}!
+  div.row.col.s12.m12.l10(style="padding-left:300px;padding-top:30px")
+    h5(style="color:#3D5AFE;") Introducción a la Teoría de Grafos
+
+  div.row.col.s12.m12.l6(style="padding-left:300px;padding-top:8px;padding-right:150px;")
+    p
+      La Teoría de Grafos juega un papel   importante  en   la  fundamentación
+      matemática de las Ciencias de la Computación. Los grafos constituyen una
+      herramienta básica para modelar fenómenos discretos y son fundamentales
+      para la comprensión de las estructuras de datos y el  análisis  de algoritmos.
+      En matemáticas y ciencias de la computación, la teoría de grafos estudia
+      las propiedades de los grafos, que son colecciones de objetos
+      llamados vértices (o nodos) conectados por líneas llamadas aristas
+      que  pueden  tener  orientación  (dirección asignada). Típicamente,
+      un grafo está diseñado por una serie de puntos (los vértices)
+      conectados por líneas
+
+  div.row.col.s12.m12.l6
+    p(align="center")
+      img(src="./images/g1.png" width="300px")
+
+  div.row.col.s12.m12.l10(style="padding-left:300px;padding-top:7px")
+    h5(style="color:#3D5AFE;") Grafo
+
+  div.row.col.s12.m12.l6(style="padding-left:300px;padding-top:3px;padding-right:150px;")
+    p
+      Un grafo es una pareja G = (V, A), donde V es un conjunto de puntos,
+      llamados vértices, y A es un conjunto de pares de vértices, llamadas aristas.
+
+    p(style="padding-top:3px;")
+      En teoría de grafos, sólo queda lo esencial del dibujo: la forma de las aristas
+      no son relevantes, sólo importa a qué vértices están unidas. La posición de los
+      vértices tampoco importa, y se puede variar para obtener un grafo más claro.
+
+  div.row.col.s12.m12.l10
+    h3(style="color:#3D5AFE;type:bold")
+      a(href='/bfs_tutorial') 
+        Comienza a codificar!

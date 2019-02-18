@@ -1,0 +1,66 @@
+doctype html
+html(ng-app="app")
+  head
+    meta(charset='UTF-8')
+    title Material Design - Mediahawkz.com Login Form
+    meta(name='author', content='Ravikumar Chauhan')
+    title Login Form | Mediahawkz
+    // Meta and Opengraph tags
+    meta(name='description', content='Material Design Login Form for Mediahawkz.com')
+    meta(name='keywords', content='html, html5, css, css3, material, form, login, google material design, material design, mediahawkz, mediahawkz.com')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:300')
+    link(rel='stylesheet', href='css/stylesheets/new_login.css')
+  body
+    // Main content
+    main(role='main')
+      .mediahawkz-login
+        .div-left
+        .div-right
+          .rkmd-form.login
+            h2.form-title Login
+            form#login(ng-submit='submit()', ng-controller='Login')
+              .form-field
+                label.field-label(for='emailid') Email ID
+                input#emailid.field-input(type='text', name='emailid' ng-model="email")
+                i.material-icons.md-18 error_outline
+              .form-field
+                label.field-label(for='pass') Password
+                input#pass.field-input(type='password', name='pass' ng-model="pass")
+                i.material-icons.md-18 error_outline
+              .form-row
+                .msg
+                  // <span class="error">We can't find that email address. Have you registered?.</span>
+              .form-row.clearfix
+                .remember.float-left
+                  input#rem(type='checkbox', name='rem')
+                  label(for='rem') Stay Signed in
+                button#submit.rkmd-btn.btn-lightBlue.ripple-effect.float-right LOGIN
+              .form-row.clearfix
+                a.link.float-right.toggle(href='#', data-tab='reset', onclick='return false;') Forgot your password?
+          .rkmd-form.reset(style='display: none;')
+            h2.form-title Reset password
+            form#reset(action='', method='POST', onsubmit='return false;')
+              .form-row
+                span.default You will receive a link to create a new password via email.
+              .form-field
+                label.field-label(for='emailid') Email ID
+                input#emailid.field-input(type='text', name='emailid')
+                i.material-icons.md-18 error_outline
+              .form-row
+                .msg
+                  // <span class="error"></span>
+              .form-row.clearfix
+                button#reset.rkmd-btn.btn-lightBlue.ripple-effect.float-right RESET PASSWORD
+              .form-row.clearfix
+                a.link.float-right.toggle(href='#', data-tab='login', onclick='return false;') Login
+          .copyright
+            p
+              | © 2016
+              a.link(href='http://www.mediahawkz.com') MediahawkZ.com
+              |  Made in India, Designed by
+              a(href='https://twitter.com/rkchauhan01', target='_blank') Ravikumar Chauhan
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    script(src='javascripts/new_login.js')
+    script(src="./javascripts/angular.min.js")
+    script(src="./javascripts/controllers/login.js")

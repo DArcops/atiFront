@@ -1,0 +1,218 @@
+doctype html
+html(lang='en' ng-app="app")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+
+    // Favicon icon
+    link(rel='icon', type='image/png', sizes='16x16', href='./images/favicon.png')
+    link(href='min/summernote.css', rel='stylesheet')
+
+    title
+      | Dialgorithm - Programacion competitiva
+    // Bootstrap Core CSS
+    link(href='min/bootstrap.min.css', rel='stylesheet')
+
+    // chartist CSS
+    link(href='min/chartist.min.css', rel='stylesheet')
+    link(href='min/chartist-init.css', rel='stylesheet')
+    link(href='min/chartist-plugin-tooltip.css', rel='stylesheet')
+    // This page css - Morris CSS
+    link(href='min/c3.min.css', rel='stylesheet')
+    // Custom CSS
+    link(href='min/style.css', rel='stylesheet')
+    // You can change the theme colors from here
+    link#theme(href='min/blue.css', rel='stylesheet')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body.fix-header.fix-sidebar.card-no-border
+    // ==============================================================
+    // Preloader - style you can find in spinners.css
+    // ==============================================================
+    .preloader
+      svg.circular(viewbox='25 25 50 50')
+        circle.path(cx='50', cy='50', r='20', fill='none', stroke-width='2', stroke-miterlimit='10')
+    // ==============================================================
+    // Main wrapper - style you can find in pages.scss
+    // ==============================================================
+    #main-wrapper
+      // ==============================================================
+      // Topbar header - style you can find in pages.scss
+      // ==============================================================
+      header.topbar
+        nav.navbar.top-navbar.navbar-toggleable-sm.navbar-light(style="background:#263238")
+          // ==============================================================
+          // Logo
+          // ==============================================================
+          .navbar-header
+            a.navbar-brand(href='index.html')
+              // Logo icon
+              b
+                // You can put here icon as well // <i class="wi wi-sunset"></i> //
+                // Light Logo icon
+                img.light-logo(src='./images/dilogo.png', alt='homepage')
+              // End Logo icon
+              // Logo text
+              //span
+                // Light Logo text
+                //img.light-logo(src='./images/logo-light-text.png', alt='homepage')
+          // ==============================================================
+          // End Logo
+          // ==============================================================
+          .navbar-collapse(ng-controller='MoreExercises')
+            // ==============================================================
+            // toggle and nav items
+            // ==============================================================
+            ul.navbar-nav.mr-auto.mt-md-0
+
+              
+            // ==============================================================
+            // User profile and search
+            // ==============================================================
+            ul.navbar-nav.my-lg-0(ng-controller='layout_user')
+              // ==============================================================
+              // Profile
+              // ==============================================================
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle.text-muted.waves-effect.waves-dark(href='', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                  img.profile-pic.m-r-10(src='./images/1.png', alt='user')
+                  | {{userName}}
+                .dropdown-menu.dropdown-menu-right.scale-up.show
+                  ul.dropdown-user
+                    li
+                      .dw-user-box
+                        .u-img
+                          img(src='./images/1.png', alt='user')
+                        .u-text
+                          h4 {{userName}}
+                          p.text-muted {{userEmail}}
+                          a.btn.btn-rounded.btn-danger.btn-sm(href='profile.html') Ver Perfil
+                    li.divider(role='separator')
+                    li
+                      a(href='#')
+                        i.ti-user
+                        |  Mi Perfil
+                    li
+                      a(href='#')
+                        i.ti-email
+                        |  Inbox
+                    li.divider(role='separator')
+                    li
+                      a(href='#')
+                        i.ti-settings
+                        |  Configuración de cuenta
+                    li.divider(role='separator')
+                    li
+                      a(href='#')
+                        i.fa.fa-power-off
+                        |  Logout
+
+      // ==============================================================
+      // End Topbar header
+      // ==============================================================
+      // ==============================================================
+      // Left Sidebar - style you can find in sidebar.scss
+      // ==============================================================
+      aside.left-sidebar(style="overflow:visible")
+        // Sidebar scroll
+        .scroll-sidebar(style="overflow-x: visible; overflow-y: hidden; width: auto; height: 100%;background:#263238")
+          // Sidebar navigation
+          nav.sidebar-nav(style="background:#263238")
+            ul#sidebarnav
+              li
+                a.waves-effect.waves-dark(href='index.html', aria-expanded='false')
+                  i.mdi.mdi-gauge
+                  span.hide-menu Mis Cursos
+              li
+                a.waves-effect.waves-dark(href='/courses', aria-expanded='false')
+                  i.mdi.mdi-gauge
+                  span.hide-menu Cursos
+              li
+                a.waves-effect.waves-dark(href='pages-profile.html', aria-expanded='false')
+                  i.mdi.mdi-account-check
+                  span.hide-menu Perfil
+              li
+                a.waves-effect.waves-dark(href='table-basic.html', aria-expanded='false')
+                  i.mdi.mdi-table
+                  span.hide-menu Rank de Usuarios
+              li
+                a.waves-effect.waves-dark(href='icon-material.html', aria-expanded='false')
+                  i.mdi.mdi-emoticon
+                  span.hide-menu Estadisticas
+
+
+        .sidebar-footer(ng-controller='layout' style="background:#263238")
+          // item
+          a.link(href='', data-toggle='tooltip', title='Settings')
+            i.ti-settings
+          // item
+          a.link(href='', data-toggle='tooltip', title='Email')
+            i.mdi.mdi-gmail
+          // item
+          a.link( data-toggle='tooltip', title='Logout', ng-click='logout()')
+            i.mdi.mdi-power
+        // End Bottom points
+
+
+      // ==============================================================
+      // End Left Sidebar - style you can find in sidebar.scss
+      // ==============================================================
+      // ==============================================================
+      // Page wrapper
+      // ==============================================================
+      .page-wrapper(style="background:#263238" ng-controller='Exercise')
+
+        block content
+
+        // footer
+        // ==============================================================
+        block footer
+          footer.footer(style="background:#263238")  © dialgorithm
+        // ==============================================================
+        // End footer
+        // ==============================================================
+      // ==============================================================
+      // End Page wrapper
+      // ==============================================================
+    // ==============================================================
+    // End Wrapper
+    // ==============================================================
+    // ==============================================================
+    // All Jquery
+    // ==============================================================
+
+
+    script(src='min/jquery.min.js')
+    // Bootstrap tether Core JavaScript
+    script(src='min/tether.min.js')
+    script(src='min/bootstrap.min.js')
+    // slimscrollbar scrollbar JavaScript
+    script(src='min/jquery.slimscroll.js')
+    // Wave Effects
+    script(src='min/waves.js')
+    // Menu sidebar
+    script(src='min/sidebarmenu.js')
+    // stickey kit
+    script(src='min/sticky-kit.min.js')
+    // Custom JavaScript
+    script(src='min/custom.min.js')
+    // ==============================================================
+    // This page plugins
+    // ==============================================================
+    // chartist chart
+    script(src='min/chartist.min.js')
+    script(src='min/chartist-plugin-tooltip.min.js')
+    // c3 JavaScript
+    script(src='min/d3.min.js')
+    script(src='min/c3.min.js')
+    // Chart JS
+    script(src='min/dashboard1.js')
+    script(src='javascripts/summernote.js')
+    script(src='min/sweetalert2.all.min.js')

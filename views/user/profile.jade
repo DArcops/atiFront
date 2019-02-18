@@ -1,0 +1,92 @@
+extends ../layout2.jade
+
+block content
+  .row(ng-controller="Profile")
+    .col-lg-4.col-xlg-3.col-md-5
+      .card
+        .card-body
+          center.m-t-30
+            img.img-circle(src='../images/1.png', width='150')
+            h4.card-title.m-t-10 {{user.username}}
+            h6.card-subtitle Accoubts Manager Amix corp
+            .row.text-center.justify-content-md-center
+              .col-4
+                a.link(href='javascript:void(0)')
+                  i.icon-people
+                  font.font-medium 254
+              .col-4
+                a.link(href='javascript:void(0)')
+                  i.icon-picture
+                  font.font-medium 54
+        div
+          hr
+        .card-body
+          small.text-muted Email address
+          h6 {{user.email}}
+
+          small.text-muted.p-t-30.db Social Profile
+          br
+          button.btn.btn-circle.btn-secondary
+            i.fa.fa-facebook
+          button.btn.btn-circle.btn-secondary
+            i.fa.fa-twitter
+          button.btn.btn-circle.btn-secondary
+            i.fa.fa-youtube
+    // Column
+    // Column
+    .col-lg-8.col-xlg-9.col-md-7
+      .card
+        // Nav tabs
+        ul.nav.nav-tabs.profile-tab(role='tablist')
+          li.nav-item
+            a.nav-link.active(data-toggle='tab', href='#settings', role='tab', aria-expanded='true') Datos
+        // Tab panes
+        .tab-content
+          #settings.tab-pane.active(role='tabpanel', aria-expanded='true')
+            .card-body
+              form.form-horizontal.form-material
+                .form-group
+                  label.col-md-12 Nombre
+                  .col-md-12
+                    input.form-control.form-control-line(type='text')
+                .form-group
+                  label.col-md-12(for='example-email') Email
+                  .col-md-12
+                    input#example-email.form-control.form-control-line(type='email', name='example-email')
+                .form-group
+                  label.col-md-12 Password
+                  .col-md-12
+                    input.form-control.form-control-line(type='password', value='password')
+                .form-group
+                  label.col-sm-12 Institución
+                  .col-sm-12
+                    input.form-control.form-control-line(type='text')
+                .form-group
+                  .col-sm-12
+                    button.btn.btn-success Actualizar Perfil
+
+      .card.card-outline-info(style="margin-top:30px;" ng-show="user.administrator")
+        .card-header
+          h4.m-b-0.text-white Agregar Permisos de Administrador
+        .card-body
+          form.form-horizontal(action='#')
+            .form-body
+              .row(style="margin-top:5%;")
+                .col-md-6
+                  .form-group.row
+                    label.control-label.text-right.col-md-3 Email
+                    .col-md-9
+                      input.form-control(type='text', placeholder='example@admin.com' ng-model="emailNewAdmin")
+                      small.form-control-feedback  Inserta el email del usuario a agregar
+
+            hr
+            .form-actions
+              .row
+                .col-md-6
+                  .row
+                    .col-md-offset-3.col-md-9
+                      button.btn.btn-success(type='submit' ng-click="addAdminUser()") Agregar
+
+    script(src="./javascripts/angular.min.js")
+    script(src="./javascripts/jquery-2.1.1.min.js")
+    script(src="./javascripts/controllers/profile.js")

@@ -1,0 +1,18 @@
+extends ../layout2.jade
+
+block content
+  .row(ng-controller='User_Courses')
+    .col-lg-4.col-xlg-3.col-md-5(ng-repeat='course in courses')
+      .card
+        img.card-img-top(src='../images/profile-bg.png', alt='Card image cap')
+        .card-block.little-profile.text-center
+          .pro-img
+            img(src='../images/code.png', alt='user')
+          h3.m-b-0 {{course.name}}
+          p {{course.short_description}}
+          button.btn.waves-effect.waves-light.btn-rounded.btn-primary(type='button' data-toggle="modal" data-target="#cu{{$index}}" ng-click="continue(course.id)") Continuar
+
+
+      script(src="./javascripts/angular.min.js")
+      script(src="./javascripts/controllers/user_courses.js")
+      script(src="./javascripts/jquery-2.1.1.min.js")

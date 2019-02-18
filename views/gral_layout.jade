@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no')
+    meta(name='theme-color', content='#2196F3')
+    title Aprende Teoria de Grafos
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css')
+    // Compiled and minified JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js')
+
+  body#top.scrollspy(ng-controller="login as lg")
+    // Pre Loader
+    #loader-wrapper
+      #loader
+      .loader-section.section-left
+      .loader-section.section-right
+    // Navigation
+    nav
+      .nav-wrapper
+        a.brand-logo(href='#!')
+          i.material-icons cloud
+          | Logo
+        ul.right.hide-on-med-and-down
+          li
+            a(href='sass.html')
+              i.material-icons search
+          li
+            a(href='badges.html')
+              i.material-icons view_module
+          li
+            a(href='collapsible.html')
+              i.material-icons refresh
+          li
+            a(href='mobile.html')
+              i.material-icons more_vert
+
+
+
+    block content
+
+    script(src='min/plugin-min.js')
+    script(src='min/custom-min.js')
+    script(src='javascripts/materialize.min.js')

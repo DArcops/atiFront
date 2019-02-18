@@ -1,0 +1,69 @@
+doctype html
+html(ng-app="app")
+  head
+    link(href='../min/plugin-min.css', type='text/css', rel='stylesheet')
+    link(href='../min/custom-min.css', type='text/css', rel='stylesheet')
+    link(href='../css/materialize.min.css', type='text/css'. rel='stylesheet')
+    link(href='css/stylesheets/style.css', type='text/css'. rel='stylesheet')
+
+  body(ng-controller="bfs2")
+    nav
+      div.nav-wrapper(style="color:#37474F;")
+        a(href="/")
+          h4 Graph app
+
+
+    div
+      .row
+        div#instructions.col.s12.m12.l4(style="resize:none; width:300px; height:520px; overflow-y:auto;" data-role="none")
+          h5 Impresión de un Grafo
+          p
+            Ahora imprimiremos el grafo que hemos creado,
+          p
+           Podemos recorrer nuestro grafo con algun ciclo, el cual itere sobre nuestros nodos y otro que itere sobre los nodos adyacentes al i-esimo nodo en cual estamos
+           procesando
+
+          img(src="../images/inst.png")
+
+
+          h5 Instrucciones:
+          p
+            Escribe el código necesario para imprimir el grafo de la lección 1 , por medio de dos ciclos for. Y V[indice].size()
+            para los tamaños de la lista de nodos adyacentes.
+
+
+        textarea#lienxzo.col.s12.m9.l9(style="background-color:#37474F; color:#FFFFFF; padding-top:5px; padding-left:10px; height:520px; width:1010px;" ng-model="text"){{text}}
+
+
+    div
+      .row
+        div.col.s12.m4.l4(style="width:300px; height:20px;")
+          a.dropdown-button.btn(href="#" style="width:200px;" data-activates="dropdown1") Hints
+          ul#dropdown1.dropdown-content(style="width:300px;")
+            li
+              a(href='#!') Con
+            li
+              a(href='#!') V[1].push_back(2);
+            li.divider
+            li
+              a(href='#!') Creas una arista de 1 a 2.
+
+
+        div.col.s12.m10.l10(style="width:900px; height:30px;")
+          a.btn.blue(ng-click="validate()" style="width:250px" ng-show="eval") Evaluar!
+
+        #modal1.modal.bottom-sheet(ng-show="modalview")
+          .modal-content
+            h4 ¡Felicidades!
+            p Haz concluido la primera sección de grafos
+            p(align="center")
+              img(src="../images/congratulations.jpg" style="width:700px; height:150px;")
+          .modal-footer
+            a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='#!') Cerrar
+
+
+
+    script(src="../javascripts/angular.min.js")
+    script(src="../javascripts/controllers/bfs_controller_2.js")
+    script(src="../javascripts/jquery-2.1.1.min.js")
+    script(src="../javascripts/materialize.min.js")

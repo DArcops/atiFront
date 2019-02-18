@@ -1,0 +1,132 @@
+extends ../layout2.jade
+
+block content
+
+  .row(style="padding-top:20px")
+    .col-lg-3.col-md-6
+      .card
+        .card-body(style="padding:1.25rem")
+          .d-flex.flex-row
+            .round.round-lg.align-self-center.round-info
+              i.ti-wallet
+            .m-l-10.align-self-center
+              h3.m-b-0.font-light 3249
+              h5.text-muted.m-b-0 Total Providers
+    .col-lg-3.col-md-6
+      .card
+        .card-body(style="padding:1.25rem")
+          .d-flex.flex-row
+            .round.round-lg.align-self-center.round-warning
+              i.mdi.mdi-cellphone-link
+            .m-l-10.align-self-center
+              h3.m-b-0.font-lgiht 2376
+              h5.text-muted.m-b-0 Total Devices
+    .col-lg-3.col-md-6
+      .card
+        .card-body(style="padding:1.25rem")
+          .d-flex.flex-row
+            .round.round-lg.align-self-center.round-primary
+              i.mdi.mdi-cart-outline
+            .m-l-10.align-self-center
+              h3.m-b-0.font-lgiht $1795
+              h5.text-muted.m-b-0 Offline Revenue
+    .col-lg-3.col-md-6
+      .card
+        .card-body(style="padding:1.25rem")
+          .d-flex.flex-row
+            .round.round-lg.align-self-center.round-danger
+              i.mdi.mdi-bullseye
+            .m-l-10.align-self-center
+              h3.m-b-0.font-lgiht $687
+              h5.text-muted.m-b-0 Ad. Expense
+    // Column
+
+
+  .row
+    .col-lg-12
+      .card
+        .card-body(style="padding:1.25rem")
+          .d-flex.no-block
+            h4.card-title Providers
+            button.btn.btn-info.btn-circle(type='button' style="margin-left:auto")
+              i.fa.fa-plus
+          .table-responsive.m-t-20
+            table.table.stylish-table
+              thead
+                tr
+                  th(colspan='2') Name
+                  th Email
+                  th Phone
+              tbody
+                tr
+                  td(style='width:50px;')
+                    span.round Sa
+                  td
+                    h6 Samsung
+                    small.text-muted Diego Arcos
+                  td Elite Admin
+                  td
+                    55-43-15-56
+                  td
+                    button.btn.btn-secondary.btn-circle(type='button')
+                      i.fa.fa-pencil
+
+                tr
+                  td
+                    span.round.round-success B
+                  td
+                    h6 Bhavesh patel
+                    small.text-muted Developer
+                  td MedicalPro Theme
+                  td
+                    55-43-15-56
+                  td
+                    button.btn.btn-secondary.btn-circle(type='button')
+                      i.fa.fa-pencil
+
+                tr
+                  td
+                    span.round.round-primary N
+                  td
+                    h6 Nirav Joshi
+                    small.text-muted Frontend Eng
+                  td Elite Admin
+                  td
+                    55-43-15-56
+                  td
+                    button.btn.btn-secondary.btn-circle(type='button')
+                      i.fa.fa-pencil
+
+                tr
+                  td
+                    span.round.round-warning M
+                  td
+                    h6 Micheal Doe
+                    small.text-muted Content Writer
+                  td Helping Hands
+                  td
+                    55-43-15-56
+                  td
+                    button.btn.btn-secondary.btn-circle(type='button')
+                      i.fa.fa-pencil
+
+
+                tr
+                  td
+                    span.round.round-danger N
+                  td
+                    h6 Johnathan
+                    small.text-muted Graphic
+                  td Digital Agency
+                  td
+                    55-43-15-56
+                  td
+                    button.btn.btn-secondary.btn-circle(type='button')
+                      i.fa.fa-pencil
+
+      // Column
+
+
+      script(src="./javascripts/angular.min.js")
+      script(src="./javascripts/controllers/list_course.js")
+      script(src="./javascripts/jquery-2.1.1.min.js")

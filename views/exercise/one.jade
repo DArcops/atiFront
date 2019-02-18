@@ -1,0 +1,50 @@
+extends ../exercise_layout.jade
+
+block content
+  .row(style="margin-rigth:5px;position:relative;height:100%;")
+    .col-lg-4.col-xlg-4.col-md-4(style="padding-right:0px;height:100%;")
+      .card
+        #summernote(style="margin-left:30px;margin-top:30px;margin-right:30px;margin-bottom:30px;")
+
+    .col-lg-8.col-xlg-8.col-md-8(style="padding-left:0px;")
+      #editor(style="top: 0;right: 0;bottom: 0;left: 0; height:68%;")
+
+      .shell-wrap(style="height:30%")
+        ul.shell-body(style="height:100%;")
+          li(ng-repeat="out in output"){{out}}
+  .row
+    .col-lg-4.col-xlg-4.col-md-4(style="padding-right:0px;height:100%;")
+      button.btn-success.btn-lg(style="cursor:pointer;margin-left:22%;margin-top:5px;margin-bottom:10px;", ng-click='probar()') Probar solución
+      i.fa.fa-spinner.fa-spin.text-success(style='font-size:30px;margin-left:20px;' ng-show="loadingTest")
+      button.btn.btn-success.btn-circle(type='button' style="margin-left:45%;" ng-show="administrator" ng-click="update()")
+        i.fa.fa-pencil
+
+    .col-lg-8.col-xlg-8.col-md-8(style="padding-left:0px;")
+      .button-group
+        button.btn-success.btn-lg(style="cursor:pointer;margin-left:30%;margin-top:5px;margin-bottom:10px;padding-left:10%;padding-right:10%" ng-click="solve()") Enviar solución
+        i.fa.fa-spinner.fa-spin.text-success(style='font-size:30px;margin-left:20px;' ng-show="loadingSolution")
+
+
+
+
+    script(src="./javascripts/angular.min.js")
+    script(src="./javascripts/jquery-2.1.1.min.js")
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js")
+    script.
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/dracula");
+      editor.getSession().setMode("ace/mode/c_cpp");
+      var baseCode = "#include <bits/stdc++.h> \n \n"
+      baseCode += "using namespace std;\n\n"
+      baseCode += "int main(int argc, char ** argv){ \n"
+      baseCode += "   return 0;\n";
+      baseCode += "}"
+      for(var i = 0; i < 30; i++)
+      baseCode += "\n";
+      editor.setValue(baseCode);
+
+    script.
+      $(document).ready(function() {
+      $('#summernote').summernote();
+      });
+    script(src="./javascripts/controllers/exercise.js")

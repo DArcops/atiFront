@@ -1,0 +1,38 @@
+extends ../layout2.jade
+
+
+block content
+  .col-lg-4.col-xlg-5.col-md-3.hoverable(style="display: inline-block; margin-left:5%;" , ng-controller='Update_Exercise')
+    .card
+      .card-block
+        #summernote
+          p Escribe las Instrucciones del Ejercicio
+
+
+  .col-lg-4.col-xlg-5.col-md-3.hoverable(style="display: inline-block; margin-left:5%;",  ng-controller='Update_Exercise')
+    .card
+      .card-block
+        .form-group
+            label.col-md-12 Nombre del Ejercicio
+            .col-md-12
+              input.form-control.form-control-line(type='text' ng-model='exercise_name')
+        .form-group
+            label.col-md-12 Input
+            .col-md-12
+              textarea.form-control.form-control-line(rows='5', ng-model="dataInput")
+        .form-group
+            label.col-md-12 Output
+            .col-md-12
+              textarea.form-control.form-control-line(rows='5', ng-model="dataOutput")
+          .form-group
+            .col-sm-12
+              button.btn.btn-success(type='submit',name='action' ng-click='submit()') Actualizar
+
+
+      script(src="./javascripts/angular.min.js")
+      script(src="./javascripts/jquery-2.1.1.min.js")
+      script(src="./javascripts/controllers/update_exercise.js")
+      script.
+        $(document).ready(function() {
+        $('#summernote').summernote();
+        });

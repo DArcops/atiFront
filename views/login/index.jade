@@ -1,0 +1,29 @@
+extends ../layout.jade
+
+link(href='../css/stylesheets/style.css', type='text/css'. rel='stylesheet')
+
+
+block content
+  .row
+     form.col.m5(style="position: fixed; left: 40%;top:40%;" ng-submit='submit()', ng-controller='Login')
+        .row
+          .input-field.col.s12.md12.l6()
+            input#email.validate(type="email", name="email", ng-model="email")
+            label(for='email') Email
+
+        .row
+          .input-field.col.s12.md12.l6
+            input#password.validate(type="password", name="password" ng-model="pass")
+            label(for='password') Password
+
+        .row
+          button.btn.waves-effect.waves-light.col.s12.md4.l6(type='submit',name='action')
+           |Ingresa!
+
+        .row
+          Si aún no tienes cuenta
+          a(href='/register') Registrate!
+
+          script(src="./javascripts/angular.min.js")
+          script(src="./javascripts/controllers/login.js")
+          script(src="./javascripts/jquery-2.1.1.min.js")
