@@ -27,14 +27,15 @@ block content
                     table#example23.display.nowrap.table.table-hover.table-striped.table-bordered.dataTable(cellspacing='0', width='100%', role='grid', aria-describedby='example23_info', style='width: 100%;')
                       thead
                         tr(role='row')
+                          th.sorting(tabindex='0', rowspan='1', colspan='1', aria-label='Start date: activate to sort column ascending', style='width: 30px;')
                           th.sorting_asc(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Name: activate to sort column descending', style='width: 162px;') Name
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Position: activate to sort column ascending', style='width: 249px;') Position
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Office: activate to sort column ascending', style='width: 119px;') Office
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Age: activate to sort column ascending', style='width: 45px;') Age
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Start date: activate to sort column ascending', style='width: 104px;') Start date
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Salary: activate to sort column ascending', style='width: 78px;') Salary
+                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Position: activate to sort column ascending', style='width: 150px;') IMEI
+                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Office: activate to sort column ascending', style='width: 119px;') Model
+                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Age: activate to sort column ascending', style='width: 45px;') Admission Date
+                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Start date: activate to sort column ascending', style='width: 104px;') Ubication
                       tfoot
                         tr
+                          th(rowspan='1', colspan='1')
                           th(rowspan='1', colspan='1') Name
                           th(rowspan='1', colspan='1') IMEI
                           th(rowspan='1', colspan='1') Model
@@ -42,30 +43,51 @@ block content
                           th(rowspan='1', colspan='1') Ubication
                       tbody
                         tr.odd(role='row')
-                          td.sorting_1 Airi Satou
-                          td Accountant
-                          td Tokyo
-                          td 33
+                          td
+                            .md-checkbox.chk-col-indigo
+                              input#i2(type='checkbox')
+                              label(for='i2')
+                          td.sorting_1 Motorola
+                          td 123456789123456
+                          td G7
                           td 2008/11/28
-                        tr.even(role='row')
-                          td.sorting_1 Angelica Ramos
-                          td Chief Executive Officer (CEO)
-                          td London
-                          td 47
-                          td 2009/10/09
-                        tr.odd(role='row')
-                          td.sorting_1 Ashton Cox
-                          td Junior Technical Author
-                          td San Francisco
-                          td 66
-                          td 2009/01/12
+                          td In Stock
 
                         tr.even(role='row')
-                          td.sorting_1 Cedric Kelly
-                          td Senior Javascript Developer
-                          td Edinburgh
-                          td 22
-                          td 2012/03/29
+                          td
+                            .md-checkbox.chk-col-indigo
+                              input#i3(type='checkbox')
+                              label(for='i3')
+                          td.sorting_1 Samsung
+                          td 1234567893333333
+                          td s10
+                          td 2017/12/28
+                          td In Stock
+
+                        tr.odd(role='row')
+                          td
+                            .md-checkbox.chk-col-indigo
+                              input#i4(type='checkbox')
+                              label(for='i4')
+                          td.sorting_1 Huawei
+                          td 1234567894444444
+                          td p20
+                          td 2017/08/28
+                          td In Stock
+
+
+                        tr.even(role='row')
+                          td
+                            .md-checkbox.chk-col-indigo
+                              input#i5(type='checkbox')
+                              label(for='i5')
+                          td.sorting_1 Lanix
+                          td 1234567891111111
+                          td j45
+                          td 2016/12/28
+                          td In Stock
+
+
             #profile2.tab-pane.p-20.show(role='tabpanel')
               .vtabs.customvtab
                 ul.nav.nav-tabs.tabs-vertical(role='tablist')
@@ -127,24 +149,10 @@ block content
 
 
                   #profile3.tab-pane.p-20(role='tabpanel')
-                    .dropify-wrapper
-                      .dropify-message
-                        span.file-icon
-                        p Drag and drop a file here or click
-                        p.dropify-error Ooops, something wrong appended.
-                      .dropify-loader
-                      .dropify-errors-container
-                        ul
-                      input#input-file-max-fs.dropify(type='file', data-max-file-size='2M')
-                      button.dropify-clear(type='button') Remove
-                      .dropify-preview
-                        span.dropify-render
-                        .dropify-infos
-                          .dropify-infos-inner
-                            p.dropify-filename
-                              span.file-icon
-                              span.dropify-filename-inner
-                            p.dropify-infos-message Drag and drop or click to replace
+                    form.row(action='')
+                      .col.s12.m6
+                        input.dropify(type='file', data-default-file='')
+
 
 
 

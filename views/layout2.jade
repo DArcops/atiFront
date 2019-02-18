@@ -12,8 +12,12 @@ html(lang='en' ng-app="app")
     link(rel='icon', type='image/png', sizes='16x16', href='./images/favicon.png')
     link(href='min/summernote.css', rel='stylesheet')
 
+
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css')
+
+
     title
-      | AT&T - Device Dashboard
+      | AT&T - Marketing Devices
     // Bootstrap Core CSS
     link(href='min/bootstrap.min.css', rel='stylesheet')
 
@@ -595,41 +599,11 @@ html(lang='en' ng-app="app")
     script(src='javascripts/summernote.js')
     script(src='min/sweetalert2.all.min.js')
 
-    script(src="./javascripts/dropify.js")
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js')
     script.
-      $(document).ready(function() {
-      // Basic
-      $('.dropify').dropify();
-      // Translated
-      $('.dropify-fr').dropify({
-      messages: {
-      default: 'Glissez-déposez un fichier ici ou cliquez',
-      replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-      remove: 'Supprimer',
-      error: 'Désolé, le fichier trop volumineux'
-      }
-      });
-      // Used events
-      var drEvent = $('#input-file-events').dropify();
-      drEvent.on('dropify.beforeClear', function(event, element) {
-      return confirm("Do you really want to delete \\"" + element.file.name + "\" ?");
-      });
-      drEvent.on('dropify.afterClear', function(event, element) {
-      alert('File deleted');
-      });
-      drEvent.on('dropify.errors', function(event, element) {
-      console.log('Has Errors');
-      });
-      var drDestroy = $('#input-file-to-destroy').dropify();
-      drDestroy = drDestroy.data('dropify')
-      $('#toggleDropify').on('click', function(e) {
-      e.preventDefault();
-      if (drDestroy.isDropified()) {
-      drDestroy.destroy();
-      } else {
-      drDestroy.init();
-      }
-      })
+      $(document).ready(function(){
+      $(".dropify").dropify();
       });
 
 
