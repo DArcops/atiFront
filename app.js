@@ -7,7 +7,7 @@ var bodyParser   = require('body-parser');
 var mongoose     = require ('mongoose');
 
 var routes = require('./routes/index');
-var users  = require('./routes/users');
+var providers  = require('./routes/providers');
 var dashboard = require('./routes/dashboard');
 
 var app = express();
@@ -34,6 +34,8 @@ app.use('/courses/:course_id',express.static(path.join(__dirname,'public')));
 app.use('/courses/:course_id/lessons',express.static(path.join(__dirname,'public')));
 app.use('/courses/:course_id/lessons/:lesson_id/exercises',express.static(path.join(__dirname,'public')));
 
+app.use('/providers/:provider_id/devices',express.static(path.join(__dirname,'public')));
+
 
 //////////OOOOLLLLLDDDD//////////////////////////////
 app.use('/lessons',express.static(path.join(__dirname,'public')));
@@ -41,7 +43,7 @@ app.use('/exercises',express.static(path.join(__dirname,'public')));
 
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/providers', providers);
 app.use('/dashboard', dashboard);
 
 

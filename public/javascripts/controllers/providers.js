@@ -22,7 +22,7 @@ var app = angular.module('app', [])
     }
 
     $scope.hideModal = function() {
-      $scope.showModal=false;
+      setVariables()
     }
 
     $scope.viewProvider = function(providerID) {
