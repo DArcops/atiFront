@@ -63,6 +63,10 @@ router.get('/dashboard',function(req,res,next){
   res.render('providers/all')
 });
 
+router.get('/register',function(req,res,next){
+  res.render('user/register')
+});
+
 router.get('/providers/:provider_id/devices',function(req,res,next){
   res.render('./devices/index')
 });

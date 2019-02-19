@@ -18,26 +18,30 @@ html(ng-app="app")
         .div-left
         .div-right
           .rkmd-form.login
-            h2.form-title Login
-            form#login(ng-submit='submit()', ng-controller='Login')
+            h2.form-title Sign Up
+            form#login(ng-submit='submit()', ng-controller='SignUp')
               .form-field
-                label.field-label(for='emailid') Email ID
+                label.field-label(for='emailid') Name
+                input#emailid.field-input(type='text', name='name' ng-model="name")
+                i.material-icons.md-18 error_outline
+              .form-field
+                label.field-label(for='emailid') Email
                 input#emailid.field-input(type='text', name='emailid' ng-model="email")
                 i.material-icons.md-18 error_outline
               .form-field
                 label.field-label(for='pass') Password
                 input#pass.field-input(type='password', name='pass' ng-model="pass")
                 i.material-icons.md-18 error_outline
+              .form-field
+                label.field-label(for='pass') Repeat your Password
+                input#pass.field-input(type='password', name='confirm_pass' ng-model="confirm_pass")
+                i.material-icons.md-18 error_outline
               .form-row
                 .msg
                   // <span class="error">We can't find that email address. Have you registered?.</span>
-              .form-row.clearfix
-                .remember.float-left
-                  input#rem(type='checkbox', name='rem')
-                  label(for='rem') Stay Signed in
-                button#submit.rkmd-btn.btn-lightBlue.ripple-effect.float-right LOGIN
-              .form-row.clearfix
-                a.link.float-right.toggle(href='/register', data-tab='reset', onclick='return false;') Sign up
+
+                button#submit.rkmd-btn.btn-lightBlue.ripple-effect.float-right Register
+
           .rkmd-form.reset(style='display: none;')
             h2.form-title Reset password
             form#reset(action='', method='POST', onsubmit='return false;')
@@ -53,11 +57,11 @@ html(ng-app="app")
               .form-row.clearfix
                 button#reset.rkmd-btn.btn-lightBlue.ripple-effect.float-right RESET PASSWORD
               .form-row.clearfix
-                a.link.float-right.toggle(href='#', data-tab='login', onclick='return false;') Login
+                a.link.float-right.toggle(href='#', data-tab='login', onclick='return false;') Sign Up
           .copyright
             p
               | © 2016
 
     script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
     script(src="./javascripts/angular.min.js")
-    script(src="./javascripts/controllers/login.js")
+    script(src='javascripts/controllers/sign_up.js')
