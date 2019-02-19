@@ -9,6 +9,9 @@ angular.module('app', [])
     $scope.submit = function(){
       var url = "http://localhost:8088/api/v1/users/login"
       var data = {
+        headers : {
+            'Access-Control-Allow-Origin': '*'
+        },
         "email" : $scope.email,
         "pass" : $scope.pass,
       }

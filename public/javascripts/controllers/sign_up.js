@@ -8,14 +8,14 @@ angular.module('app', [])
 
     $scope.submit = function(){
       if($scope.pass !== $scope.confirm_pass){
-        console.log("los passwords no coinciden")
         $scope.pass = "";
         $scope.confirm_pass = "";
         return
       }
 
-      var url = "http://localhost:8088/api/v1/users/login"
+      var url = "http://localhost:8088/api/v1/users/register"
       var data = {
+        "username": $scope.name,
         "email" : $scope.email,
         "pass" : $scope.pass,
       }
@@ -25,11 +25,7 @@ angular.module('app', [])
       $http.post(url, data, config)
               .success(function (data, status, headers, config) {
                 console.log(data)
-
-                localStorage.setItem("token",data.token)
-                localStorage.setItem("user_name",data.user_name)
-                localStorage.setItem("user_email",data.user_email)
-                $window.location.href = "/dashboard"
+                $window.location.href = "/"
               })
               .error(function (data, status, header, config) {
                 console.log(status)

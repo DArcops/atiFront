@@ -42,36 +42,39 @@ block content
     // Column
 
 
-  .row
-    #exampleModal.modal.fade.show(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel1', aria-modal='true', style='display: block; padding-right: 15px;')
+  .row(ng-controller='Providers')
+    #exampleModal.modal.fade.show(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel1', aria-modal='true', style='display: block; padding-right: 15px;', ng-show="showModal")
       .modal-dialog(role='document')
         .modal-content
           .modal-header
             h4#exampleModalLabel1.modal-title Add Provider
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
+            button.close(type='button', data-dismiss='modal', aria-label='Close' ng-click="hideModal()")
               span(aria-hidden='true') ×
           .modal-body
             form
               .form-group
                 label.control-label(for='recipient-name') Name:
-                input#recipient-name1.form-control(type='text')
+                input#recipient-name1.form-control(type='text', ng-model="name")
+              .form-group
+                label.control-label(for='recipient-name') Contact Name:
+                input#recipient-name1.form-control(type='text', ng-model="contactName")
               .form-group
                 label.control-label(for='message-name') Email:
-                input#message-text1.form-control
+                input#message-text1.form-control(ng-model="email")
               .form-group
                 label.control-label(for='message-name') Phone:
-                input#message-text1.form-control(type='tel')
+                input#message-text1.form-control(type='tel', ng-model="phone")
           .modal-footer
-            button.btn.btn-info(type='button', data-dismiss='modal') Close
-            button.btn.btn-success(type='button') Save
-    .modal-backdrop.fade.show
+            button.btn.btn-info(type='button', data-dismiss='modal', ng-click="hideModal()") Close
+            button.btn.btn-success(type='button', ng-click="saveProvider()") Save
+    .modal-backdrop.fade.show(ng-show="showModal")
 
     .col-lg-12
       .card
         .card-body(style="padding:1.25rem")
           .d-flex.no-block
             h4.card-title Providers
-            button.btn.btn-info.btn-circle(type='button' style="margin-left:auto")
+            button.btn.btn-info.btn-circle(type='button' style="margin-left:auto" ng-click="activeModal()")
               i.fa.fa-plus
 
           .table-responsive.m-t-20
@@ -82,68 +85,17 @@ block content
                   th Email
                   th Phone
               tbody
-                tr
+                tr(ng-repeat='provider in providers')
                   td(style='width:50px;')
-                    span.round Sa
+                    a(href="/{{provider.id}}/devices")
+                      span.round {{provider.name[0]+provider.name[1]}}
                   td
-                    h6 Samsung
-                    small.text-muted Diego Arcos
-                  td Elite Admin
+                    a(href="/{{provider.id}}/devices")
+                      h6 {{provider.name}}
+                    small.text-muted {{provider.contact_name}}
+                  td {{provider.email}}
                   td
-                    55-43-15-56
-                  td
-                    button.btn.btn-secondary.btn-circle(type='button')
-                      i.fa.fa-pencil
-
-                tr
-                  td
-                    span.round.round-success B
-                  td
-                    h6 Bhavesh patel
-                    small.text-muted Developer
-                  td MedicalPro Theme
-                  td
-                    55-43-15-56
-                  td
-                    button.btn.btn-secondary.btn-circle(type='button')
-                      i.fa.fa-pencil
-
-                tr
-                  td
-                    span.round.round-primary N
-                  td
-                    h6 Nirav Joshi
-                    small.text-muted Frontend Eng
-                  td Elite Admin
-                  td
-                    55-43-15-56
-                  td
-                    button.btn.btn-secondary.btn-circle(type='button')
-                      i.fa.fa-pencil
-
-                tr
-                  td
-                    span.round.round-warning M
-                  td
-                    h6 Micheal Doe
-                    small.text-muted Content Writer
-                  td Helping Hands
-                  td
-                    55-43-15-56
-                  td
-                    button.btn.btn-secondary.btn-circle(type='button')
-                      i.fa.fa-pencil
-
-
-                tr
-                  td
-                    span.round.round-danger N
-                  td
-                    h6 Johnathan
-                    small.text-muted Graphic
-                  td Digital Agency
-                  td
-                    55-43-15-56
+                    {{provider.phone}}
                   td
                     button.btn.btn-secondary.btn-circle(type='button')
                       i.fa.fa-pencil
@@ -152,5 +104,5 @@ block content
 
 
       script(src="./javascripts/angular.min.js")
-      script(src="./javascripts/controllers/list_course.js")
+      script(src="./javascripts/controllers/providers.js")
       script(src="./javascripts/jquery-2.1.1.min.js")
