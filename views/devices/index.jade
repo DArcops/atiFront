@@ -1,7 +1,7 @@
 extends ../layout2.jade
 
 block content
-  .row(style="padding-top:30px;")
+  .row(style="padding-top:30px;", ng-controller="Devices")
     .col-12
       .card
         .card-body.p-b-0
@@ -42,50 +42,18 @@ block content
                           th(rowspan='1', colspan='1') Admission Date
                           th(rowspan='1', colspan='1') Ubication
                       tbody
-                        tr.odd(role='row')
+                        tr(role='row', ng-repeat="device in devices", ng-class="{true: 'odd',false:'even'}[device.id%2==0]")
                           td
                             .md-checkbox.chk-col-indigo
-                              input#i2(type='checkbox')
-                              label(for='i2')
-                          td.sorting_1 Motorola
-                          td 123456789123456
-                          td G7
-                          td 2008/11/28
-                          td In Stock
-
-                        tr.even(role='row')
-                          td
-                            .md-checkbox.chk-col-indigo
-                              input#i3(type='checkbox')
-                              label(for='i3')
-                          td.sorting_1 Samsung
-                          td 1234567893333333
-                          td s10
-                          td 2017/12/28
-                          td In Stock
-
-                        tr.odd(role='row')
-                          td
-                            .md-checkbox.chk-col-indigo
-                              input#i4(type='checkbox')
-                              label(for='i4')
-                          td.sorting_1 Huawei
-                          td 1234567894444444
-                          td p20
-                          td 2017/08/28
-                          td In Stock
+                              input(id="{{device.id}}", type='checkbox')
+                              label(for='{{device.id}}')
+                          td.sorting_1 {{device.name}}
+                          td {{device.imei}}
+                          td {{device.mpn}}
+                          td {{device.admission_date}}
+                          td {{device.ubication}}
 
 
-                        tr.even(role='row')
-                          td
-                            .md-checkbox.chk-col-indigo
-                              input#i5(type='checkbox')
-                              label(for='i5')
-                          td.sorting_1 Lanix
-                          td 1234567891111111
-                          td j45
-                          td 2016/12/28
-                          td In Stock
 
 
             #profile2.tab-pane.p-20.show(role='tabpanel')
@@ -113,34 +81,34 @@ block content
                             .col-md-4
                               .form-group
                                 label.control-label Comercial Name
-                                input#firstName.form-control
+                                input#firstName.form-control(ng-model="name")
                                 small.form-control-feedback  This is inline help
                             // /span
                             .col-md-4
                               .form-group
                                 label.control-label IMEI
-                                input#lastName.form-control(type='number')
+                                input#lastName.form-control(type='number',  ng-model="imei")
                                 //small.form-control-feedback(style="display:none")  This field has error.
                             .col-md-4
                               .form-group
                                 label.control-label Model
-                                input#lastName.form-control(type='text')
+                                input#lastName.form-control(type='text', ng-model="mpn")
                             // /span
                             // /row
                           .row
                             .col-md-6
                               .form-group
                                 label.control-label Ubication
-                                input#firstName.form-control(type='text', placeholder='In Stock', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;')
+                                input#firstName.form-control(type='text', placeholder='In Stock', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;', ng-model="ubication")
                                 small.form-control-feedback  This is inline help
                               // /span
                             .col-md-6
                               .form-group
                                 label.control-label Admission Date
-                                input.form-control(type='date', placeholder='dd/mm/yyyy')
+                                input.form-control(type='date', placeholder='dd/mm/yyyy', ng-model="admission_date")
                         .row
                           .col-md-4
-                            button.btn.btn-success(type='submit')
+                            button.btn.btn-success(type='submit', ng-click="saveDevice()")
                               i.fa.fa-check
                               |  Save
                           .col-md-4
@@ -161,4 +129,3 @@ block content
 
       script(src="./javascripts/angular.min.js")
       script(src="./javascripts/jquery-2.1.1.min.js")
-      script(src="./javascripts/controllers/list_course.js")

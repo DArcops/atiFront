@@ -71,32 +71,6 @@ var app = angular.module('app', [])
                  })
                });
     }
-
-    // $scope.submit = function(){
-    //   if($scope.pass !== $scope.confirm_pass){
-    //     $scope.pass = "";
-    //     $scope.confirm_pass = "";
-    //     return
-    //   }
-    //
-    //   var url = "http://localhost:8088/api/v1/users/register"
-    //   var data = {
-    //     "email" : $scope.email,
-    //     "pass" : $scope.pass,
-    //   }
-    //   console.log(data);
-    //   var config = {};
-    //
-    //   $http.post(url, data, config)
-    //           .success(function (data, status, headers, config) {
-    //             console.log(data)
-    //             $window.location.href = "/"
-    //           })
-    //           .error(function (data, status, header, config) {
-    //             console.log(status)
-    //           });
-    // }
-
   });
 
 
