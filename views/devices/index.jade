@@ -1,131 +1,401 @@
-extends ../layout2.jade
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    // Tell the browser to be responsive to screen width
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
 
-block content
-  .row(style="padding-top:30px;", ng-controller="Devices")
-    .col-12
-      .card
-        .card-body.p-b-0
-          ul.nav.nav-tabs.customtab(role='tablist')
-            li.nav-item
-              a.nav-link.show.active(data-toggle='tab', href='#home2', role='tab', aria-selected='true')
-                span.hidden-sm-up
-                  i.ti-home
-                span.hidden-xs-down Devices List
-            li.nav-item
-              a.nav-link.show(data-toggle='tab', href='#profile2', role='tab', aria-selected='false')
-                span.hidden-sm-up
-                  i.ti-user
-                span.hidden-xs-down Upload Devices
 
-          // Tab panes
-          .tab-content
-            #home2.tab-pane.show.active(role='tabpanel')
-              .p-20
-                h4.card-title Provider Devices
-                h6.card-subtitle Devices details
-                .table-responsive.m-t-40
-                    table#example23.display.nowrap.table.table-hover.table-striped.table-bordered.dataTable(cellspacing='0', width='100%', role='grid', aria-describedby='example23_info', style='width: 100%;')
-                      thead
-                        tr(role='row')
-                          th.sorting(tabindex='0', rowspan='1', colspan='1', aria-label='Start date: activate to sort column ascending', style='width: 30px;')
-                          th.sorting_asc(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Name: activate to sort column descending', style='width: 162px;') Name
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Position: activate to sort column ascending', style='width: 150px;') IMEI
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Office: activate to sort column ascending', style='width: 119px;') Model
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Age: activate to sort column ascending', style='width: 45px;') Admission Date
-                          th.sorting(tabindex='0', aria-controls='example23', rowspan='1', colspan='1', aria-label='Start date: activate to sort column ascending', style='width: 104px;') Ubication
-                      tfoot
-                        tr
-                          th(rowspan='1', colspan='1')
-                          th(rowspan='1', colspan='1') Name
-                          th(rowspan='1', colspan='1') IMEI
-                          th(rowspan='1', colspan='1') Model
-                          th(rowspan='1', colspan='1') Admission Date
-                          th(rowspan='1', colspan='1') Ubication
-                      tbody
-                        tr(role='row', ng-repeat="device in devices", ng-class="{true: 'odd',false:'even'}[device.id%2==0]")
-                          td
-                            .md-checkbox.chk-col-indigo
-                              input(id="{{device.id}}", type='checkbox')
-                              label(for='{{device.id}}')
-                          td.sorting_1 {{device.name}}
-                          td {{device.imei}}
-                          td {{device.mpn}}
-                          td {{device.admission_date}}
-                          td {{device.ubication}}
+    script(src="./javascripts/jquery-2.1.1.min.js")
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js')
+    script(src='./javascripts/angular-datatables.min.js')
+    script(src='./javascripts/jquery.dataTables.min.js')
+
+    script(src='https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js')
+    script(src='https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js')
+    script(src='https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js')
+    script(src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js')
+
+    // Favicon icon
+    link(rel='icon', type='image/png', sizes='16x16', href='./images/favicon.png')
+    link(href='min/summernote.css', rel='stylesheet')
 
 
 
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
 
-            #profile2.tab-pane.p-20.show(role='tabpanel')
-              .vtabs.customvtab
-                ul.nav.nav-tabs.tabs-vertical(role='tablist')
-                  li.nav-item
-                    a.nav-link.active(data-toggle='tab', href='#home3', role='tab')
-                      span.hidden-sm-up
-                        i.ti-home
-                      span.hidden-xs-down One
-                  li.nav-item
-                    a.nav-link(data-toggle='tab', href='#profile3', role='tab')
-                      span.hidden-sm-up
+    title
+      | AT&T - Marketing Devices
+    // Bootstrap Core CSS
+    link(href='min/bootstrap.min.css', rel='stylesheet')
+
+    // chartist CSS
+    link(href='min/chartist.min.css', rel='stylesheet')
+    link(href='min/chartist-init.css', rel='stylesheet')
+    link(href='min/chartist-plugin-tooltip.css', rel='stylesheet')
+    // This page css - Morris CSS
+    link(href='min/c3.min.css', rel='stylesheet')
+    // Custom CSS
+    link(href='min/style.css', rel='stylesheet')
+    // You can change the theme colors from here
+    link#theme(href='min/blue.css', rel='stylesheet')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body.fix-header.fix-sidebar.card-no-border(ng-app='customerApp', ng-controller='customerController')
+    // ==============================================================
+    // Preloader - style you can find in spinners.css
+    // ==============================================================
+    .preloader
+      svg.circular(viewbox='25 25 50 50')
+        circle.path(cx='50', cy='50', r='20', fill='none', stroke-width='2', stroke-miterlimit='10')
+    // ==============================================================
+    // Main wrapper - style you can find in pages.scss
+    // ==============================================================
+    #main-wrapper
+      // ==============================================================
+      // Topbar header - style you can find in pages.scss
+      // ==============================================================
+      header.topbar
+        nav.navbar.top-navbar.navbar-toggleable-sm.navbar-light
+          // ==============================================================
+          // Logo
+          // ==============================================================
+          .navbar-header
+            a.navbar-brand(href='index.html')
+              // Logo icon
+              b
+                // You can put here icon as well // <i class="wi wi-sunset"></i> //
+                // Light Logo icon
+                img.light-logo(src='./images/att_logo2.png', alt='homepage')
+              // End Logo icon
+              // Logo text
+              //span
+                // Light Logo text
+                //img.light-logo(src='./images/logo-light-text.png', alt='homepage')
+          // ==============================================================
+          // End Logo
+          // ==============================================================
+          .navbar-collapse
+            // ==============================================================
+            // toggle and nav items
+            // ==============================================================
+            ul.navbar-nav.mr-auto.mt-md-0
+              // This is
+              li.nav-item.hidden-sm-down.search-box
+                a.nav-link.hidden-sm-down.text-muted.waves-effect.waves-dark(href='javascript:void(0)')
+                  i.ti-search
+                form.app-search
+                  input.form-control(type='text', placeholder='Search & enter')
+                  a.srh-btn
+                    i.ti-close
+
+              // ==============================================================
+              // Search
+              // ==============================================================
+
+            // ==============================================================
+            // User profile and search
+            // ==============================================================
+            ul.navbar-nav.my-lg-0
+              li.nav-item.dropdown
+                a#2.nav-link.dropdown-toggle.text-muted.waves-effect.waves-dark(href='', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                  i.mdi.mdi-email
+                  .notify
+                    span.heartbit
+                    span.point
+                .dropdown-menu.mailbox.dropdown-menu-right.scale-up(aria-labelledby='2')
+                  ul
+                    li
+                      .drop-title You have 4 new messages
+                    li
+                      .slimScrollDiv(style='position: relative; overflow: hidden; width: auto; height: 250px;')
+                        .message-center(style='overflow: hidden; width: auto; height: 250px;')
+                          // Message
+                          a(href='#')
+                            .user-img
+                              img.img-circle(src='../assets/images/users/1.jpg', alt='user')
+                              span.profile-status.online.pull-right
+                            .mail-contnet
+                              h5 Pavan kumar
+                              span.mail-desc Just see the my admin!
+                              span.time 9:30 AM
+                          // Message
+                          a(href='#')
+                            .user-img
+                              img.img-circle(src='../assets/images/users/2.jpg', alt='user')
+                              span.profile-status.busy.pull-right
+                            .mail-contnet
+                              h5 Sonu Nigam
+                              span.mail-desc I've sung a song! See you at
+                              span.time 9:10 AM
+                          // Message
+                          a(href='#')
+                            .user-img
+                              img.img-circle(src='../assets/images/users/3.jpg', alt='user')
+                              span.profile-status.away.pull-right
+                            .mail-contnet
+                              h5 Arijit Sinh
+                              span.mail-desc I am a singer!
+                              span.time 9:08 AM
+                          // Message
+                          a(href='#')
+                            .user-img
+                              img.img-circle(src='../assets/images/users/4.jpg', alt='user')
+                              span.profile-status.offline.pull-right
+                            .mail-contnet
+                              h5 Pavan kumar
+                              span.mail-desc Just see the my admin!
+                              span.time 9:02 AM
+                        .slimScrollBar(style='background: rgb(220, 220, 220); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 183.824px;')
+                        .slimScrollRail(style='width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;')
+                    li
+                      a.nav-link.text-center(href='javascript:void(0);')
+                        strong See all e-Mails
+                        i.fa.fa-angle-right
+
+              // ==============================================================
+              // Profile
+              // ==============================================================
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle.text-muted.waves-effect.waves-dark(href='', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                  img.profile-pic.m-r-10(src='./images/1.png', alt='user')
+                  | {{userName}}
+                .dropdown-menu.dropdown-menu-right.scale-up.show
+                  ul.dropdown-user
+                    li
+                      .dw-user-box
+                        .u-img
+                          img(src='./images/1.png', alt='user')
+                        .u-text
+                          h4 {{userName}}
+                          p.text-muted {{userEmail}}
+                          a.btn.btn-rounded.btn-danger.btn-sm(href='/profile') Ver Perfil
+                    li.divider(role='separator')
+                    li
+                      a(href='#')
                         i.ti-user
-                      span.hidden-xs-down From .csv
-                // Tab panes
-                .tab-content
-                  #home3.tab-pane.active(role='tabpanel')
-                    .p-20
-                      form(action='#')
-                        .form-body
-                          h3.card-title Device Info
-                          hr
-                          .row.p-t-20
-                            .col-md-4
-                              .form-group
-                                label.control-label Comercial Name
-                                input#firstName.form-control(ng-model="name")
-                                small.form-control-feedback  This is inline help
-                            // /span
-                            .col-md-4
-                              .form-group
-                                label.control-label IMEI
-                                input#lastName.form-control(type='number',  ng-model="imei")
-                                //small.form-control-feedback(style="display:none")  This field has error.
-                            .col-md-4
-                              .form-group
-                                label.control-label Model
-                                input#lastName.form-control(type='text', ng-model="mpn")
-                            // /span
-                            // /row
-                          .row
-                            .col-md-6
-                              .form-group
-                                label.control-label Ubication
-                                input#firstName.form-control(type='text', placeholder='In Stock', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;', ng-model="ubication")
-                                small.form-control-feedback  This is inline help
-                              // /span
-                            .col-md-6
-                              .form-group
-                                label.control-label Admission Date
-                                input.form-control(type='date', placeholder='dd/mm/yyyy', ng-model="admission_date")
-                        .row
-                          .col-md-4
-                            button.btn.btn-success(type='submit', ng-click="saveDevice()")
-                              i.fa.fa-check
-                              |  Save
-                          .col-md-4
-                            button.btn.btn-inverse(type='button') Cancel
+                        |  Mi Perfil
+                    li
+                      a(href='#')
+                        i.ti-email
+                        |  Inbox
+                    li.divider(role='separator')
+                    li
+                      a(href='#')
+                        i.ti-settings
+                        |  Configuración de cuenta
+                    li.divider(role='separator')
+                    li
+                      a(href='#')
+                        i.fa.fa-power-off
+                        |  Logout
+
+      // ==============================================================
+      // End Topbar header
+      // ==============================================================
+      // ==============================================================
+      // Left Sidebar - style you can find in sidebar.scss
+      // ==============================================================
+      aside.left-sidebar(style="overflow:visible")
+        // Sidebar scroll
+        .scroll-sidebar(style="overflow-x: visible; overflow-y: hidden; width: auto; height: 100%;")
+          // Sidebar navigation
+          nav.sidebar-nav
+            ul#sidebarnav
+              li
+                a.waves-effect.waves-dark(href='/my_courses', aria-expanded='false')
+                  i.mdi.mdi-clipboard-account
+                  span.hide-menu Providers
+              li
+                a.waves-effect.waves-dark(href='/courses', aria-expanded='false')
+                  i.mdi.mdi-cellphone-link
+                  span.hide-menu Devices
+              li
+                a.waves-effect.waves-dark(href='/profile', aria-expanded='false')
+                  i.mdi.mdi-account-plus
+                  span.hide-menu Assigments
+
+              li
+                a.waves-effect.waves-dark(href='/stats', aria-expanded='false')
+                  i.mdi.mdi-folder
+                  span.hide-menu Files
+
+              li
+                a.waves-effect.waves-dark(href='/contact', aria-expanded='false')
+                  i.mdi.mdi-email
+                  span.hide-menu Contacto
 
 
 
-                  #profile3.tab-pane.p-20(role='tabpanel')
-                    form.row(action='')
-                      .col-md-12
-                        input.dropify(type='file', data-default-file='')
+      // ==============================================================
+      // End Left Sidebar - style you can find in sidebar.scss
+      // ==============================================================
+      // ==============================================================
+      // Page wrapper
+      // ==============================================================
+      .page-wrapper
+
+
+        // ==============================================================
+        // Container fluid
+        // ==============================================================
+        .container-fluid
+          // Start Page Content
+          // ==============================================================
+          .row(style="padding-top:30px;", ng-app='customerApp', ng-controller='customerController')
+            .col-12
+              .card
+                .card-body.p-b-0
+                  ul.nav.nav-tabs.customtab(role='tablist')
+                    li.nav-item
+                      a.nav-link.show.active(data-toggle='tab', href='#home2', role='tab', aria-selected='true')
+                        span.hidden-sm-up
+                          i.ti-home
+                        span.hidden-xs-down Devices List
+                    li.nav-item
+                      a.nav-link.show(data-toggle='tab', href='#profile2', role='tab', aria-selected='false')
+                        span.hidden-sm-up
+                          i.ti-user
+                        span.hidden-xs-down Upload Devices
+
+                  // Tab panes
+                  .tab-content
+                    #home2.tab-pane.show.active(role='tabpanel')
+                      .p-20
+                        h4.card-title {{provider.name}} Devices
+                        h6.card-subtitle Devices details
+
+                        .table-responsive.m-t-40
+                          table.table.table-striped.table-bordered.display.nowrap.table-hover(datatable='ng', dt-options='dataTableOpt', width='100%', role='grid')
+                            thead
+                              tr(role='row')
+                                th
+                                th Name
+                                th IMEI
+                                th Model
+                                th Admission Date
+                                th Ubication
+                            tbody
+                              tr(role='row', ng-repeat='device in devices')
+                                td
+                                  .md-checkbox.chk-col-indigo
+                                    input(id="{{device.id}}", type='checkbox')
+                                    label(for='{{device.id}}')
+                                td {{ device.name }}
+                                td {{ device.imei }}
+                                td {{ device.mpn }}
+                                td {{ device.admission_date | date:'dd/MM/yyyy' }}
+                                td {{ device.ubication }}
+
+                    #profile2.tab-pane.p-20.show(role='tabpanel')
+                      .vtabs.customvtab
+                        ul.nav.nav-tabs.tabs-vertical(role='tablist')
+                          li.nav-item
+                            a.nav-link.active(data-toggle='tab', href='#home3', role='tab')
+                              span.hidden-sm-up
+                                i.ti-home
+                              span.hidden-xs-down One
+                          li.nav-item
+                            a.nav-link(data-toggle='tab', href='#profile3', role='tab')
+                              span.hidden-sm-up
+                                i.ti-user
+                              span.hidden-xs-down From .csv
+                                             // Tab panes
+                        .tab-content
+                          #home3.tab-pane.active(role='tabpanel')
+                            .p-20
+                              form(action='#')
+                                .form-body
+                                  h3.card-title Device Info
+                                  hr
+                                  .row.p-t-20
+                                    .col-md-4
+                                      .form-group
+                                        label.control-label Comercial Name
+                                        input#firstName.form-control( ng-model="name")
+                                        small.form-control-feedback  This is inline help
+                                      // /span
+                                    .col-md-4
+                                      .form-group
+                                        label.control-label IMEI
+                                        input#lastName.form-control(type='number', ng-model="imei")
+                                        //small.form-control-feedback(style="display:none")  This field has error.
+                                    .col-md-4
+                                      .form-group
+                                        label.control-label Model
+                                        input#lastName.form-control(type='text', ng-model="mpn")
+                                    // /span
+                                    // /row
+                                  .row
+                                    .col-md-6
+                                      .form-group
+                                        label.control-label Ubication
+                                        input#firstName.form-control(type='text', ng-model="ubication", placeholder='In Stock', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;')
+                                        small.form-control-feedback  This is inline help
+                                    // /span
+                                      .col-md-6
+                                        .form-group
+                                          label.control-label Admission Date
+                                          input.form-control(type='date', placeholder='dd/mm/yyyy', ng-model="admission_date")
+                                    .row
+                                      .col-md-4
+                                        button.btn.btn-success(type='submit', ng-click="saveDevice()")
+                                          i.fa.fa-check
+                                          |  Save
+                                       .col-md-4
+                                          button.btn.btn-inverse(type='button') Cancel
+
+                          #profile3.tab-pane.p-20(role='tabpanel')
+                            form.row(action='')
+                              .col-md-12
+                                input.dropify(type='file', data-default-file='')
+
+
+          script(src='./javascripts/controllers/devices.js')
 
 
 
 
+    // Bootstrap tether Core JavaScript
+    script(src='min/tether.min.js')
+    script(src='min/bootstrap.min.js')
+    // slimscrollbar scrollbar JavaScript
+    script(src='min/jquery.slimscroll.js')
+    // Wave Effects
+    script(src='min/waves.js')
+    // Menu sidebar
+    script(src='min/sidebarmenu.js')
+    // stickey kit
+    script(src='min/sticky-kit.min.js')
+    // Custom JavaScript
+    script(src='min/custom.min.js')
+    // ==============================================================
+    // This page plugins
+    // ==============================================================
+    // chartist chart
+    script(src='min/chartist.min.js')
+    script(src='min/chartist-plugin-tooltip.min.js')
+    // c3 JavaScript
+    script(src='min/d3.min.js')
+    script(src='min/c3.min.js')
+    // Chart JS
+    script(src='min/dashboard1.js')
+    script(src='javascripts/summernote.js')
+    script(src='min/sweetalert2.all.min.js')
 
-
-
-      script(src="./javascripts/angular.min.js")
-      script(src="./javascripts/jquery-2.1.1.min.js")
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js')
+    script.
+      $(document).ready(function(){
+      $(".dropify").dropify();
+      });

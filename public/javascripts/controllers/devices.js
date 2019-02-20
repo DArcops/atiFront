@@ -1,26 +1,34 @@
+var app = angular.module('customerApp', ['datatables']);
+app.controller('customerController', function($scope, $http, $window ,DTOptionsBuilder){
 
-var app = angular.module('app', [])
-  app.controller('Devices',  function($scope, $http, $window) {
-    console.log("in Devices controller");
     var baseUrl = "http://localhost:8088/api/v1"
     var config = {};
     var provider_id = $window.location.href.split("/")[4]
 
+    $scope.dataTableOpt = {
+      dom: 'Bfrtip',
+      buttons: [
+      'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    };
 
     loadDevices = function() {
-      $http.get(baseUrl+"/providers/"+provider_id+"/devices",config)
-        .then(function(response) {
-          $scope.devices = response.data;
-          console.log("RESPUESTA DE DEVICES", $scope.providers)
+      $http.get(baseUrl+"/providers/1/devices").success(function(data, status, headers, config){
+        $scope.devices = data;
       });
     }
+
+
+
+    loadDevices()
+
 
     $scope.saveDevice = function() {
       var data = {
         "provider_id": parseInt(provider_id),
         "imei": $scope.imei.toString(),
         "mpn": $scope.mpn,
-        "mpn": $scope.name,
+        "name": $scope.name,
         "ubication": $scope.ubication,
         "admission_date": $scope.admission_date,
       }
@@ -34,7 +42,6 @@ var app = angular.module('app', [])
                    timer: 1500
                  })
                  loadDevices();
-
                })
                .error(function (data, status, header, config) {
                  swal({
@@ -45,10 +52,62 @@ var app = angular.module('app', [])
                  })
                });
     }
+});
 
-    loadDevices();
-
-  });
+//
+// var app = angular.module('app', [])
+//   app.controller('Devices',  function($scope, $http, $window) {
+//     console.log("in Devices controller");
+//     var baseUrl = "http://localhost:8088/api/v1"
+//     var config = {};
+//     var provider_id = $window.location.href.split("/")[4]
+//
+//
+//
+//
+//
+//     loadDevices = function() {
+//       $http.get(baseUrl+"/providers/"+provider_id+"/devices",config)
+//         .then(function(response) {
+//           $scope.devices = response.data;
+//           console.log("RESPUESTA DE DEVICES", $scope.providers)
+//       });
+//     }
+//
+//     $scope.saveDevice = function() {
+//       var data = {
+//         "provider_id": parseInt(provider_id),
+//         "imei": $scope.imei.toString(),
+//         "mpn": $scope.mpn,
+//         "mpn": $scope.name,
+//         "ubication": $scope.ubication,
+//         "admission_date": $scope.admission_date,
+//       }
+//       console.log("add provider data", data)
+//       $http.post(baseUrl+"/providers/"+provider_id+"/devices", data, config)
+//                .success(function (data, status, headers, config) {
+//                  swal({
+//                    type: 'success',
+//                    title: 'Device Created',
+//                    showConfirmButton: false,
+//                    timer: 1500
+//                  })
+//                  loadDevices();
+//
+//                })
+//                .error(function (data, status, header, config) {
+//                  swal({
+//                    type: 'warning',
+//                    title: 'An error ocurred',
+//                    showConfirmButton: false,
+//                    timer: 2500
+//                  })
+//                });
+//     }
+//
+//     loadDevices();
+//
+//   });
 
 
 
