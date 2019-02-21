@@ -298,12 +298,15 @@ html(lang='en')
                                 td {{ device.ubication }}
 
                         .p-20
-                          button.btn.btn-info(type='submit', ng-if="selectedDevices.length !== 0")
-                            i.fa.fa-eye
-                            |  View  Assigment
-                          button.btn.btn-success(type='submit', ng-if="selectedDevices.length !== 0", style="padding-left:10px;", ng-click="sm()")
-                            i.fa.fa-plus-circle
-                            |  Create Assigment
+                          .row
+                            .col-2
+                              button.btn.btn-info(type='submit', ng-if="selectedDevices.length === 1")
+                                i.fa.fa-eye
+                                |  View  Assigment
+                            .col-2
+                              button.btn.btn-success(type='submit', ng-if="selectedDevices.length !== 0", style="padding-left:10px;", ng-click="sm()")
+                                i.fa.fa-plus-circle
+                                |  Create Assigment
 
                         .p-20
                           #exampleModal.modal.fade.show(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel1', aria-modal='true', style='display: block; padding-right: 15px;', ng-show="showModal")
@@ -322,13 +325,13 @@ html(lang='en')
                                         label(for='{{imd}}') {{imd}}
                                     .form-group
                                       label.control-label(for='recipient-name') Description:
-                                      input#recipient-name1.form-control(type='text', ng-model="description")
+                                      input#recipient-name1.form-control(type='text', ng-model="assigment_description")
                                     .form-group
                                       label.control-label(for='message-name') User Assigned:
                                       input#message-text1.form-control(ng-model="email")
                                     .form-group
-                                      label.m-t-40 Default Material End Date
-                                      input.form-control(type='date', placeholder='dd/mm/yyyy', ng-model="admission_date")
+                                      label.control-label(for='end-date') End Date
+                                      input.form-control(type='date', placeholder='dd/mm/yyyy', ng-model="assigment_end_date")
 
                                 .modal-footer
                                   button.btn.btn-info(type='button', data-dismiss='modal', ng-click="sm()") Close
@@ -382,22 +385,27 @@ html(lang='en')
                                         input#firstName.form-control(type='text', ng-model="ubication", placeholder='In Stock', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;')
                                         small.form-control-feedback  This is inline help
                                     // /span
-                                      .col-md-6
+                                    .col-md-6
                                         .form-group
                                           label.control-label Admission Date
                                           input.form-control(type='date', placeholder='dd/mm/yyyy', ng-model="admission_date")
-                                    .row
-                                      .col-md-4
-                                        button.btn.btn-success(type='submit', ng-click="saveDevice()")
-                                          i.fa.fa-check
-                                          |  Save
-                                       .col-md-4
-                                          button.btn.btn-inverse(type='button') Cancel
+                                  .row
+                                    .col-md-4
+                                      button.btn.btn-success(type='submit', ng-click="saveDevice()")
+                                        i.fa.fa-check
+                                        |  Save
+                                    .col-md-4
+                                      button.btn.btn-inverse(type='button') Cancel
 
                           #profile3.tab-pane.p-20(role='tabpanel')
-                            form.row(action='')
-                              .col-md-12
-                                input.dropify(type='file', data-default-file='')
+                            form(ng-submit="uploadFile()")
+                              .row
+                                .col-md-12
+                                  input.dropify(type='file',ngf-select="onFileSelect($files)")
+                              .row(style="padding-top:20px;")
+                                .col-md-5
+                                  button.btn.btn-info(type='submit')
+                                    |  Upload
 
 
           script(src='./javascripts/controllers/devices.js')
