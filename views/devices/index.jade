@@ -401,10 +401,10 @@ html(lang='en')
                             form(ng-submit="uploadFile()")
                               .row
                                 .col-md-12
-                                  input.dropify(type='file',ngf-select="onFileSelect($files)")
+                                  input.dropify(type='file', ng-files="getTheFiles($files)")
                               .row(style="padding-top:20px;")
                                 .col-md-5
-                                  button.btn.btn-info(type='submit')
+                                  button.btn.btn-info(type='submit', ng-click="uploadFiles()")
                                     |  Upload
 
 
