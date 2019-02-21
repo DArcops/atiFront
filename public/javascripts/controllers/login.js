@@ -1,13 +1,14 @@
 
 angular.module('app', [])
   .controller('Login',  function($scope, $http, $window) {
+    var baseUrl = "https://b8867e98.ngrok.io";
     console.log("in login controller");
 
     if(localStorage.getItem("token") !== null)
       $window.location.href = "/courses"
 
     $scope.submit = function(){
-      var url = "http://localhost:8088/api/v1/users/login"
+      var url = baseUrl+"/api/v1/users/login"
       var data = {
         headers : {
             'Access-Control-Allow-Origin': '*'

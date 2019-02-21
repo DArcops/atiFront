@@ -2,7 +2,7 @@
 var app = angular.module('app', [])
   app.controller('Providers',  function($scope, $http, $window) {
     console.log("in Providers controller");
-    var baseUrl = "http://localhost:8088/api/v1"
+    var baseUrl = "https://b8867e98.ngrok.io"+"/api/v1"
     var config = {};
 
     setVariables = function() {
@@ -30,7 +30,7 @@ var app = angular.module('app', [])
     }
 
     loadProviders = function() {
-      $http.get("http://localhost:8088/api/v1/providers",config)
+      $http.get(baseUrl+"/providers",config)
         .then(function(response) {
           $scope.providers = response.data;
           console.log("RESPUESTA DE PROVIDERS", $scope.providers)

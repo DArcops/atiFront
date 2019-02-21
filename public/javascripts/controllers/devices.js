@@ -17,7 +17,7 @@ app.directive('ngFiles', ['$parse', function ($parse) {
 
 app.controller('customerController', function($scope, $http, $window ,DTOptionsBuilder){
 
-    var baseUrl = "http://localhost:8088/api/v1"
+    var baseUrl = "https://b8867e98.ngrok.io"+"/api/v1"
     var config = {};
     var provider_id = $window.location.href.split("/")[4]
     var formdata = new FormData();
@@ -26,21 +26,42 @@ app.controller('customerController', function($scope, $http, $window ,DTOptionsB
 
     $scope.dataTableOpt = {
       dom: 'Bfrtip',
+      destroy:true,
       buttons: [
       'copy', 'csv', 'excel', 'pdf', 'print'
       ]
     };
 
+
     loadDevices = function() {
-      $http.get(baseUrl+"/providers/1/devices").success(function(data, status, headers, config){
+      $http.get(baseUrl+"/providers/"+provider_id+"/devices").success(function(data, status, headers, config){
         $scope.devices = data;
       });
     }
     loadDevices()
 
+    notifyAndReloadDevices = function(message) {
+      swal({
+        type: 'success',
+        title: message,
+        showConfirmButton: false,
+        timer: 2000
+      });
+      loadDevices();
+    }
+
+
     $scope.sm = function() {
       $scope.showModal = !$scope.showModal;
     }
+
+    $http.get(baseUrl+"/providers/"+provider_id).success(function(data, status, headers, config){
+      $scope.provider = data;
+    });
+
+    $http.get(baseUrl+"/users").success(function(data, status, headers, config){
+      $scope.users = data;
+    });
 
     $scope.clickedItem = function(device_id) {
       if ($scope.selectedDevices.indexOf(device_id) < 0) {
@@ -48,8 +69,6 @@ app.controller('customerController', function($scope, $http, $window ,DTOptionsB
       } else {
         $scope.selectedDevices.splice($scope.selectedDevices.indexOf(device_id),1)
       }
-      console.log("clicked", device_id)
-      console.log("items", $scope.selectedDevices)
     }
 
 
@@ -65,13 +84,7 @@ app.controller('customerController', function($scope, $http, $window ,DTOptionsB
       console.log("add provider data", data)
       $http.post(baseUrl+"/providers/"+provider_id+"/devices", data, config)
                .success(function (data, status, headers, config) {
-                 swal({
-                   type: 'success',
-                   title: 'Device Created',
-                   showConfirmButton: false,
-                   timer: 1500
-                 })
-                 loadDevices();
+                 notifyAndReloadDevices("Device Created");
                })
                .error(function (data, status, header, config) {
                  swal({
@@ -104,13 +117,37 @@ app.controller('customerController', function($scope, $http, $window ,DTOptionsB
                 // SEND THE FILES.
                 $http(request)
                     .success(function (d) {
-                        alert(d);
-                        loadDevices();
-                        console.log("hecho", d)
+                      notifyAndReloadDevices("File Uploaded")
                     })
                     .error(function (e) {
                       console.log("err", e)
                     });
+    }
+
+    $scope.saveAssigment = function() {
+      var data = {
+        "user_name": $scope.user_assigned,
+        "imeis": $scope.selectedDevices,
+        "end_date": $scope.assigment_end_date,
+        "description": $scope.assigment_description
+      }
+      $http.post(baseUrl+"/providers/"+provider_id+"/assigments", data, config)
+               .success(function (data, status, headers, config) {
+                 swal({
+                   type: 'success',
+                   title: "Assigment Created",
+                   showConfirmButton: false,
+                   timer: 2000
+                 });
+               })
+               .error(function (data, status, header, config) {
+                 swal({
+                   type: 'warning',
+                   title: 'An error ocurred',
+                   showConfirmButton: false,
+                   timer: 2500
+                 })
+               });
     }
 
 });

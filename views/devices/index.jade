@@ -313,7 +313,7 @@ html(lang='en')
                             .modal-dialog(role='document')
                               .modal-content
                                 .modal-header
-                                  h4#exampleModalLabel1.modal-title Add Provider
+                                  h4#exampleModalLabel1.modal-title New Assigment
                                   button.close(type='button', data-dismiss='modal', aria-label='Close' ng-click="sm()")
                                     span(aria-hidden='true') ×
                                 .modal-body
@@ -323,19 +323,22 @@ html(lang='en')
                                       .md-checkbox.chk-col-indigo(ng-repeat="imd in selectedDevices")
                                         input(id="{{imd}}", checked ,type='checkbox' )
                                         label(for='{{imd}}') {{imd}}
-                                    .form-group
-                                      label.control-label(for='recipient-name') Description:
-                                      input#recipient-name1.form-control(type='text', ng-model="assigment_description")
+
                                     .form-group
                                       label.control-label(for='message-name') User Assigned:
-                                      input#message-text1.form-control(ng-model="email")
+                                        select.form-control(ng-model="user_assigned")
+                                          option User
+                                          option(ng-repeat="user in users") {{user.username}}
                                     .form-group
                                       label.control-label(for='end-date') End Date
                                       input.form-control(type='date', placeholder='dd/mm/yyyy', ng-model="assigment_end_date")
+                                    .form-group
+                                      label.control-label(for='recipient-name') Description:
+                                      textarea.form-control(rows='2', ng-model="assigment_description")
 
                                 .modal-footer
                                   button.btn.btn-info(type='button', data-dismiss='modal', ng-click="sm()") Close
-                                  button.btn.btn-success(type='button', ng-click="saveProvider()") Save
+                                  button.btn.btn-success(type='button', ng-click="saveAssigment()") Save
                           .modal-backdrop.fade.show(ng-show="showModal")
 
 

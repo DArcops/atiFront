@@ -1,6 +1,7 @@
 
 angular.module('app', [])
   .controller('SignUp',  function($scope, $http, $window) {
+    var baseUrl = "https://b8867e98.ngrok.io";
     console.log("in SignUp controller");
 
     if(localStorage.getItem("token") !== null)
@@ -13,7 +14,7 @@ angular.module('app', [])
         return
       }
 
-      var url = "http://localhost:8088/api/v1/users/register"
+      var url = baseUrl+"/api/v1/users/register"
       var data = {
         "username": $scope.name,
         "email" : $scope.email,
