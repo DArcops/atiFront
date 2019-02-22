@@ -5738,7 +5738,7 @@ When click on sidebar toggler and also for tablet
   .mini-sidebar .sidebar-nav #sidebarnav > li.active > a {
     border-color: transparent; }
     .mini-sidebar .sidebar-nav #sidebarnav > li.active > a.active {
-      border-color: #009efb; } }
+      border-color: transparent; } }
 
 @media (max-width: 767px) {
   .mini-sidebar .left-sidebar {

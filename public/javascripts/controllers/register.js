@@ -1,6 +1,6 @@
 angular.module('app', [])
   .controller('Register',  function($scope, $http,$window) {
-    var baseUrl = "https://44b90368.ngrok.io"
+    var baseUrl = "https://9b96d449.ngrok.io"
     var url = baseUrl+"/api/v1/users/register"
 
     $scope.submit2 = function(){

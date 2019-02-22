@@ -17,7 +17,7 @@ app.directive('ngFiles', ['$parse', function ($parse) {
 
 app.controller('customerController', function($scope, $http, $window ,DTOptionsBuilder){
 
-    var baseUrl = "https://44b90368.ngrok.io"+"/api/v1"
+    var baseUrl = "https://9b96d449.ngrok.io"+"/api/v1"
     var config = {};
     var provider_id = $window.location.href.split("/")[4]
     var formdata = new FormData();
