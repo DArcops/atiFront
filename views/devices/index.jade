@@ -285,6 +285,7 @@ html(lang='en')
                                 th Model
                                 th Admission Date
                                 th Ubication
+                                th Assigment
                             tbody
                               tr(role='row', ng-repeat='device in devices', ng-model="selectedDevices")
                                 td
@@ -296,13 +297,12 @@ html(lang='en')
                                 td {{ device.mpn }}
                                 td {{ device.admission_date | date:'dd/MM/yyyy' }}
                                 td {{ device.ubication }}
+                                td
+                                  a(href="#", ng-if="device.assigment_id > 0", ng-click="showAssigmentInfo(device.assigment_id)") View Assigment
+
 
                         .p-20
                           .row
-                            .col-2
-                              button.btn.btn-info(type='submit', ng-if="selectedDevices.length === 1")
-                                i.fa.fa-eye
-                                |  View  Assigment
                             .col-2
                               button.btn.btn-success(type='submit', ng-if="selectedDevices.length !== 0", style="padding-left:10px;", ng-click="sm()")
                                 i.fa.fa-plus-circle
@@ -327,7 +327,6 @@ html(lang='en')
                                     .form-group
                                       label.control-label(for='message-name') User Assigned:
                                         select.form-control(ng-model="user_assigned")
-                                          option User
                                           option(ng-repeat="user in users") {{user.username}}
                                     .form-group
                                       label.control-label(for='end-date') End Date
@@ -340,6 +339,31 @@ html(lang='en')
                                   button.btn.btn-info(type='button', data-dismiss='modal', ng-click="sm()") Close
                                   button.btn.btn-success(type='button', ng-click="saveAssigment()") Save
                           .modal-backdrop.fade.show(ng-show="showModal")
+
+                          #exampleModal.modal.fade.show(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel1', aria-modal='true', style='display: block; padding-right: 15px;', ng-show="showModalAssignation")
+                            .modal-dialog(role='document')
+                              .modal-content
+                                .modal-header
+                                  h4#exampleModalLabel1.modal-title Assigment Details
+                                  button.close(type='button', data-dismiss='modal', aria-label='Close' ng-click="smAssignation()")
+                                    span(aria-hidden='true') ×
+                                .modal-body
+                                  form
+                                    .form-group
+                                      label.control-label(for='message-name') User Assigned:
+                                        select.form-control(ng-model="update_assigned_user")
+                                          option(ng-repeat="user in users") {{user.username}}
+                                    .form-group
+                                      label.control-label(for='end-date') End Date
+                                      input.form-control(type='date', placeholder='dd/mm/yyyy', ng-model="update_assigment_end_date")
+                                    .form-group
+                                      label.control-label(for='recipient-name') Description:
+                                      textarea.form-control(rows='2', ng-model="update_assigment_description")
+
+                                .modal-footer
+                                  button.btn.btn-info(type='button', data-dismiss='modal', ng-click="smAssignation()") Close
+                                  button.btn.btn-success(type='button') Update Assigment
+                          .modal-backdrop.fade.show(ng-show="showModalAssignation")
 
 
                     #profile2.tab-pane.p-20.show(role='tabpanel')

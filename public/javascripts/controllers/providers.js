@@ -2,7 +2,7 @@
 var app = angular.module('app', [])
   app.controller('Providers',  function($scope, $http, $window) {
     console.log("in Providers controller");
-    var baseUrl = "https://b8867e98.ngrok.io"+"/api/v1"
+    var baseUrl = "https://44b90368.ngrok.io"+"/api/v1"
     var config = {};
 
     setVariables = function() {

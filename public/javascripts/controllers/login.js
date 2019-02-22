@@ -1,7 +1,7 @@
 
 angular.module('app', [])
   .controller('Login',  function($scope, $http, $window) {
-    var baseUrl = "https://b8867e98.ngrok.io";
+    var baseUrl = "https://44b90368.ngrok.io";
     console.log("in login controller");
 
     if(localStorage.getItem("token") !== null)

@@ -4,10 +4,8 @@ html(ng-app="app")
     meta(charset='UTF-8')
     AT&T
     meta(name='author', content='Ravikumar Chauhan')
-    title Login Form | Mediahawkz
+    title AT&T - Marketing
     // Meta and Opengraph tags
-    meta(name='description', content='Material Design Login Form for Mediahawkz.com')
-    meta(name='keywords', content='html, html5, css, css3, material, form, login, google material design, material design, mediahawkz, mediahawkz.com')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:300')
     link(rel='stylesheet', href='css/stylesheets/new_login.css')
@@ -21,20 +19,16 @@ html(ng-app="app")
             h2.form-title Sign Up
             form#login(ng-submit='submit()', ng-controller='SignUp')
               .form-field
-                label.field-label(for='emailid') Name
-                input#emailid.field-input(type='text', name='name' ng-model="name")
+                input#emailid.field-input(type='text', name='name', ng-model="name", placeholder="Name")
                 i.material-icons.md-18 error_outline
               .form-field
-                label.field-label(for='emailid') Email
-                input#emailid.field-input(type='text', name='emailid' ng-model="email")
+                input#emailid.field-input(type='text', name='emailid', ng-model="email", placeholder="Email")
                 i.material-icons.md-18 error_outline
               .form-field
-                label.field-label(for='pass') Password
-                input#pass.field-input(type='password', name='pass' ng-model="pass")
+                input#pass.field-input(type='password', name='pass' ,ng-model="pass",placeholder="Password")
                 i.material-icons.md-18 error_outline
               .form-field
-                label.field-label(for='pass') Repeat your Password
-                input#pass.field-input(type='password', name='confirm_pass' ng-model="confirm_pass")
+                input#pass.field-input(type='password', name='confirm_pass' ng-model="confirm_pass", placeholder="Confirm your password")
                 i.material-icons.md-18 error_outline
               .form-row
                 .msg

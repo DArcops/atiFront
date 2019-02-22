@@ -17,12 +17,13 @@ app.directive('ngFiles', ['$parse', function ($parse) {
 
 app.controller('customerController', function($scope, $http, $window ,DTOptionsBuilder){
 
-    var baseUrl = "https://b8867e98.ngrok.io"+"/api/v1"
+    var baseUrl = "https://44b90368.ngrok.io"+"/api/v1"
     var config = {};
     var provider_id = $window.location.href.split("/")[4]
     var formdata = new FormData();
     $scope.selectedDevices = [];
     $scope.showModal = false;
+    $scope.showModalAssignation = false;
 
     $scope.dataTableOpt = {
       dom: 'Bfrtip',
@@ -53,6 +54,10 @@ app.controller('customerController', function($scope, $http, $window ,DTOptionsB
 
     $scope.sm = function() {
       $scope.showModal = !$scope.showModal;
+    }
+
+    $scope.smAssignation = function() {
+      $scope.showModalAssignation = !$scope.showModalAssignation;
     }
 
     $http.get(baseUrl+"/providers/"+provider_id).success(function(data, status, headers, config){
@@ -148,6 +153,17 @@ app.controller('customerController', function($scope, $http, $window ,DTOptionsB
                    timer: 2500
                  })
                });
+    }
+
+    $scope.showAssigmentInfo = function(assigment_id) {
+      $scope.showModalAssignation = true;
+      $http.get(baseUrl+"/providers/"+provider_id+"/assigments/"+assigment_id).success(function(data, status, headers, config){
+        $scope.assigment = data;
+        $scope.update_assigment_end_date = new Date($scope.assigment.end_date)
+        console.log("Assigment END DATE", $scope.assigment.end_date)
+        $scope.update_assigment_description = $scope.assigment.description;
+        $scope.update_assigned_user = $scope.assigment.username;
+      });
     }
 
 });
