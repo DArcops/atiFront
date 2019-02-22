@@ -138,12 +138,7 @@ app.controller('customerController', function($scope, $http, $window ,DTOptionsB
       }
       $http.post(baseUrl+"/providers/"+provider_id+"/assigments", data, config)
                .success(function (data, status, headers, config) {
-                 swal({
-                   type: 'success',
-                   title: "Assigment Created",
-                   showConfirmButton: false,
-                   timer: 2000
-                 });
+                 notifyAndReloadDevices("Assigment Created")
                })
                .error(function (data, status, header, config) {
                  swal({

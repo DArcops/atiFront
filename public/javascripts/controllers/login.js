@@ -5,14 +5,11 @@ angular.module('app', [])
     console.log("in login controller");
 
     if(localStorage.getItem("token") !== null)
-      $window.location.href = "/courses"
+      $window.location.href = "/dashboard"
 
     $scope.submit = function(){
       var url = baseUrl+"/api/v1/users/login"
       var data = {
-        headers : {
-            'Access-Control-Allow-Origin': '*'
-        },
         "email" : $scope.email,
         "pass" : $scope.pass,
       }
